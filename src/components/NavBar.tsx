@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { tempMovieData } from "../App";
+import { ITempMovie } from "../Interfaces/interfaces";
 
-export const NavBar = () => {
+export const NavBar: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
   return (
     <nav className="nav-bar">
       <Logo />
       <Search />
-      <NumResults />
+      <NumResults movies={movies} />
     </nav>
   );
 };
@@ -34,8 +34,8 @@ export const Logo = () => {
   );
 };
 
-export const NumResults = () => {
-  const movies = tempMovieData;
+export const NumResults: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+  // const movies = tempMovieData;
 
   return (
     <p className="num-results">

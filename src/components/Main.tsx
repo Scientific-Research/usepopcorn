@@ -1,33 +1,17 @@
 import React, { useState } from "react";
 import { tempMovieData, tempWatchedData } from "../App";
+import { ITempMovie, ITempWatchedData } from "../Interfaces/interfaces";
 
-interface ITempMovie {
-  imdbID: string;
-  Title: string;
-  Year: string;
-  Poster: string;
-}
-
-interface ITempWatchedData {
-  imdbID: string;
-  Title: string;
-  Year: string;
-  Poster: string;
-  runtime: number;
-  imdbRating: number;
-  userRating: number;
-}
-
-export const Main = () => {
+export const Main: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
   return (
     <main className="main">
-      <ListBox />
+      <ListBox movies={movies} />
       <WatchedBox />
     </main>
   );
 };
 
-export const ListBox = () => {
+export const ListBox: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
   const [isOpen1, setIsOpen1] = useState(true);
 
   return (
@@ -39,13 +23,14 @@ export const ListBox = () => {
         {isOpen1 ? "–" : "+"}
       </button>
 
-      {isOpen1 && <MovieList />}
+      {isOpen1 && <MovieList movies={movies} />}
     </div>
   );
 };
 
-export const MovieList = () => {
-  const [movies, setMovies] = useState(tempMovieData);
+export const MovieList: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+  // const [movies, setMovies] = useState(tempMovieData);
+
   return (
     <ul className="list">
       {movies?.map((movie) => (
