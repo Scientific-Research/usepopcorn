@@ -85,7 +85,7 @@ export const WatchedBox = () => {
       {isOpen2 && (
         <>
           <WatchedSummary watched={watched} />
-          <WatchedList watched={watched} />
+          <WatchedMoviesList watched={watched} />
         </>
       )}
     </div>
@@ -126,7 +126,7 @@ export const WatchedSummary: React.FC<{ watched: ITempWatchedData[] }> = ({
   );
 };
 
-export const WatchedList: React.FC<{ watched: ITempWatchedData[] }> = ({
+export const WatchedMoviesList: React.FC<{ watched: ITempWatchedData[] }> = ({
   watched,
 }) => {
   return (
