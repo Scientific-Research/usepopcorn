@@ -2,18 +2,11 @@ import { useState } from "react";
 import { tempMovieData } from "../App";
 
 export const NavBar = () => {
-  const movies = tempMovieData;
-
   return (
     <nav className="nav-bar">
-      <div className="logo">
-        <span role="img">🍿</span>
-        <h1>usePopcorn</h1>
-      </div>
+      <Logo />
       <Search />
-      <p className="num-results">
-        Found <strong>{movies.length}</strong> results
-      </p>
+      <Numresults />
     </nav>
   );
 };
@@ -29,5 +22,14 @@ export const Search = () => {
       value={query}
       onChange={(e) => setQuery(e.target.value)}
     />
+  );
+};
+
+export const Logo = () => {
+  return (
+    <div className="logo">
+      <span role="img">🍿</span>
+      <h1>usePopcorn</h1>
+    </div>
   );
 };
