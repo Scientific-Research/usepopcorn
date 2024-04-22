@@ -48,23 +48,6 @@ export const tempWatchedData = [
   },
 ];
 
-// interface ITempMovie {
-//   imdbID: string;
-//   Title: string;
-//   Year: string;
-//   Poster: string;
-// }
-
-// interface ITempWatchedData {
-//   imdbID: string;
-//   Title: string;
-//   Year: string;
-//   Poster: string;
-//   runtime: number;
-//   imdbRating: number;
-//   userRating: number;
-// }
-
 export default function App() {
   return (
     <>

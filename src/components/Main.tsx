@@ -8,6 +8,16 @@ interface ITempMovie {
   Poster: string;
 }
 
+interface ITempWatchedData {
+  imdbID: string;
+  Title: string;
+  Year: string;
+  Poster: string;
+  runtime: number;
+  imdbRating: number;
+  userRating: number;
+}
+
 export const Main = () => {
   return (
     <main className="main">
@@ -61,15 +71,8 @@ export const Movie: React.FC<{ movie: ITempMovie }> = ({ movie }) => {
 };
 
 export const WatchedBox = () => {
-  const average = (arr: number[]) =>
-    arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
-
   const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen2, setIsOpen2] = useState(true);
-
-  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
-  const avgUserRating = average(watched.map((movie) => movie.userRating));
-  const avgRuntime = average(watched.map((movie) => movie.runtime));
 
   return (
     <div className="box">
@@ -81,27 +84,7 @@ export const WatchedBox = () => {
       </button>
       {isOpen2 && (
         <>
-          <div className="summary">
-            <h2>Movies you watched</h2>
-            <div>
-              <p>
-                <span>#️⃣</span>
-                <span>{watched.length} movies</span>
-              </p>
-              <p>
-                <span>⭐️</span>
-                <span>{avgImdbRating}</span>
-              </p>
-              <p>
-                <span>🌟</span>
-                <span>{avgUserRating}</span>
-              </p>
-              <p>
-                <span>⏳</span>
-                <span>{avgRuntime} min</span>
-              </p>
-            </div>
-          </div>
+          <WatchedSummary watched={watched} />
 
           <ul className="list">
             {watched.map((movie) => (
@@ -127,6 +110,40 @@ export const WatchedBox = () => {
           </ul>
         </>
       )}
+    </div>
+  );
+};
+
+export const WatchedSummary: React.FC<{ watched: ITempWatchedData[] }> = ({
+  watched,
+}) => {
+  const average = (arr: number[]) =>
+    arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+
+  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
+  const avgUserRating = average(watched.map((movie) => movie.userRating));
+  const avgRuntime = average(watched.map((movie) => movie.runtime));
+  return (
+    <div className="summary">
+      <h2>Movies you watched</h2>
+      <div>
+        <p>
+          <span>#️⃣</span>
+          <span>{watched.length} movies</span>
+        </p>
+        <p>
+          <span>⭐️</span>
+          <span>{avgImdbRating}</span>
+        </p>
+        <p>
+          <span>🌟</span>
+          <span>{avgUserRating}</span>
+        </p>
+        <p>
+          <span>⏳</span>
+          <span>{avgRuntime} min</span>
+        </p>
+      </div>
     </div>
   );
 };
