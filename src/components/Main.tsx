@@ -1,5 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { tempMovieData, tempWatchedData } from "../App";
+
+interface ITempMovie {
+  imdbID: string;
+  Title: string;
+  Year: string;
+  Poster: string;
+}
 
 export const Main = () => {
   return (
@@ -21,6 +28,7 @@ export const ListBox = () => {
       >
         {isOpen1 ? "–" : "+"}
       </button>
+
       {isOpen1 && <MovieList />}
     </div>
   );
@@ -31,18 +39,24 @@ export const MovieList = () => {
   return (
     <ul className="list">
       {movies?.map((movie) => (
-        <li key={movie.imdbID}>
-          <img src={movie.Poster} alt={`${movie.Title} poster`} />
-          <h3>{movie.Title}</h3>
-          <div>
-            <p>
-              <span>🗓</span>
-              <span>{movie.Year}</span>
-            </p>
-          </div>
-        </li>
+        <Movie movie={movie} key={movie.imdbID} />
       ))}
     </ul>
+  );
+};
+
+export const Movie: React.FC<{ movie: ITempMovie }> = ({ movie }) => {
+  return (
+    <li>
+      <img src={movie.Poster} alt={`${movie.Title} poster`} />
+      <h3>{movie.Title}</h3>
+      <div>
+        <p>
+          <span>🗓</span>
+          <span>{movie.Year}</span>
+        </p>
+      </div>
+    </li>
   );
 };
 
