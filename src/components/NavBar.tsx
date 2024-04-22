@@ -6,7 +6,7 @@ export const NavBar = () => {
     <nav className="nav-bar">
       <Logo />
       <Search />
-      <Numresults />
+      <NumResults />
     </nav>
   );
 };
@@ -34,7 +34,7 @@ export const Logo = () => {
   );
 };
 
-export const Numresults = () => {
+export const NumResults = () => {
   const movies = tempMovieData;
 
   return (
