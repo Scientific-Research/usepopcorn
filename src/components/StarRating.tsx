@@ -14,15 +14,16 @@ const textStyle = {
   margin: "0",
 };
 
-export const StarRating = () => {
+export const StarRating = ({ maxRating }: { maxRating: number }) => {
   return (
     <div style={containerStyle}>
       <div style={starContainerStyle}>
-        {Array.from({ length: 5 }, (_, i) => (
+        {/* {Array.from({ length: 5 }, (_, i) => ( */}
+        {Array.from({ length: maxRating }, (_, i) => (
           <span key={i}>S{i + 1}</span>
         ))}
       </div>
-      <p style={textStyle}>10</p>
+      <p style={textStyle}>{maxRating}</p>
     </div>
   );
 };
