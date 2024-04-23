@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { IMovies, IWatchedMovies } from "../Interfaces/interfaces";
 
-export const Main: React.FC<{
-  movies: IMovies[];
-  watched: IWatchedMovies[];
-}> = ({ movies, watched }) => {
+// export const Main: React.FC<{
+//   movies: IMovies[];
+//   watched: IWatchedMovies[];
+// }> = ({ movies, watched }) => {
+export const Main = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="main">
-      <ListBox movies={movies} />
-      <WatchedBox watched={watched} />
+      {/* NOTE: using component composition => moving these three subcomponents of NavBar to the App.tsx to get the prop directly from state variable there and not from NavBar anymore(removing prop drilling problem), therefore, we get and write the children as prop here instead! */}
+
+      {/* <ListBox movies={movies} />
+      <WatchedBox watched={watched} /> */}
+      {children}
     </main>
   );
 };

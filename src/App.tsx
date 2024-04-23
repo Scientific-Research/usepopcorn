@@ -1,5 +1,5 @@
 import { Logo, NavBar, NumResults, Search } from "./components/NavBar";
-import { Main } from "./components/Main";
+import { ListBox, Main, WatchedBox } from "./components/Main";
 import { useState } from "react";
 
 const tempMovieData = [
@@ -55,16 +55,26 @@ export default function App() {
 
   return (
     <>
-      {/* <NavBar movies={movies}> */}
       {/* NOTE: We have here component composition => composed NavBar with its components and in NavBar page, we write children instead of these subcomponents!
 
-      // NOTE: Our NumResults doesn't get the movies prop from NavBar anymore, rather, it gets it directly from movies state variable above! that's why I have deleted the movies prop from NavBar below! */}
+      // NOTE: Our NumResults doesn't get the movies prop from NavBar anymore, rather, it gets it directly from movies state variable above! that's why I removed the movies prop from NavBar below! */}
+
+      {/* <NavBar movies={movies}> */}
       <NavBar>
         <Logo />
         <Search />
         <NumResults movies={movies} />
       </NavBar>
-      <Main movies={movies} watched={watched} />
+
+      {/* NOTE: the same process => component composition done below for Main as i explained it for NavBar above!
+      and now, the ListBox and WatchedBox receive the props directly from state variables above and not from Main anymore, that's why i removed the props from Main below!
+      In Main, we will have only children as prop and nothing more!*/}
+
+      {/* <Main movies={movies} watched={watched} /> */}
+      <Main>
+        <ListBox movies={movies} />
+        <WatchedBox watched={watched} />
+      </Main>
     </>
   );
 }

@@ -5,6 +5,8 @@ import { IMovies } from "../Interfaces/interfaces";
 export const NavBar = ({ children }: { children: React.ReactNode }) => {
   return (
     <nav className="nav-bar">
+      {/* NOTE: using component composition => moving these three subcomponents of NavBar to the App.tsx to get the prop directly from state variable there and not from NavBar anymore(removing prop drilling problem) therefore, we get and write the children as prop here instead! */}
+
       {/* <Logo />
       <Search />
       <NumResults movies={movies} /> */}
