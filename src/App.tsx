@@ -81,19 +81,32 @@ export default function App() {
         {/* <ListBox movies={movies}> */}
         {/* <ListBox> */}
 
+        {/* NOTE: OR INSTEAD OF USING CHILDREN, WE CAN DECLARE IT AS EXPLICIT PROP: IN THIS CASE, OUR PROP CALLED element!
+        // NOTE: the similar pattern is used by React Router!*/}
+        <Box element={<MovieList movies={movies} />} />
+
         {/* NOTE: Using the reusable Box for ListBox => we bring this one part inside Box which is not available in Box and send to it the prop directly! */}
-        <Box>
+        {/* <Box>
           <MovieList movies={movies} />
-        </Box>
+        </Box> */}
 
         {/* </ListBox> */}
         {/* <WatchedBox watched={watched} /> */}
 
+        {/* NOTE: THE SAME CONCEPT => SENDING element AS EXPLICIT PROP FOR THIS ONE INSTEAD OF USING CHILDREN:*/}
+        <Box
+          element={
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMoviesList watched={watched} />
+            </>
+          }
+        />
         {/* NOTE: Using the reusable Box for WatchedBox => we bring these two parts inside Box which is not available in Box and send them the props directly!*/}
-        <Box>
+        {/* <Box>
           <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
-        </Box>
+        </Box> */}
       </Main>
     </>
   );
