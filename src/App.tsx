@@ -2,7 +2,7 @@ import { Logo, NavBar, NumResults, Search } from "./components/NavBar";
 import { Main } from "./components/Main";
 import { useState } from "react";
 
-export const tempMovieData = [
+const tempMovieData = [
   {
     imdbID: "tt1375666",
     Title: "Inception",
@@ -26,7 +26,7 @@ export const tempMovieData = [
   },
 ];
 
-export const tempWatchedData = [
+const tempWatchedData = [
   {
     imdbID: "tt1375666",
     Title: "Inception",
@@ -51,6 +51,7 @@ export const tempWatchedData = [
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
 
   return (
     <>
@@ -60,7 +61,7 @@ export default function App() {
         <Search />
         <NumResults movies={movies} />
       </NavBar>
-      <Main movies={movies} />
+      <Main movies={movies} watched={watched} />
     </>
   );
 }

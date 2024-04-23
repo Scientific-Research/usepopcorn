@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { tempWatchedData } from "../App";
 import { IMovies, IWatchedMovies } from "../Interfaces/interfaces";
 
-export const Main: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
+export const Main: React.FC<{
+  movies: IMovies[];
+  watched: IWatchedMovies[];
+}> = ({ movies, watched }) => {
   return (
     <main className="main">
       <ListBox movies={movies} />
-      <WatchedBox />
+      <WatchedBox watched={watched} />
     </main>
   );
 };
@@ -55,8 +57,8 @@ export const Movie: React.FC<{ movie: IMovies }> = ({ movie }) => {
   );
 };
 
-export const WatchedBox = () => {
-  const [watched, setWatched] = useState(tempWatchedData);
+export const WatchedBox = ({ watched }: { watched: IWatchedMovies[] }) => {
+  // const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen2, setIsOpen2] = useState(true);
 
   return (
