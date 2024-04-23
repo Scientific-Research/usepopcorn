@@ -21,7 +21,8 @@ export const StarRating = ({
 }: {
   maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
 }) => {
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [tempRating, setTempRating] = useState(0);
 
   return (
     <div style={containerStyle}>
@@ -32,13 +33,17 @@ export const StarRating = ({
           <Star
             key={i}
             onRate={() => setRating(i + 1)}
-            full={rating >= i + 1 ? true : false}
+            onHoverIn={() => setTempRating(i + 1)}
+            onHoverOut={() => setTempRating(0)}
+            full={
+              tempRating ? tempRating >= i + 1 : rating >= i + 1 ? true : false
+            }
           />
         ))}
       </div>
       {/* <p style={textStyle}>{maxRating}</p> */}
       {/* NOTE: Short circuit sign => || means when the rating is falsy value => we will have   the double quotaion => "" at output, otherwise, we will have rating value at output!*/}
-      <p style={textStyle}>{rating || ""}</p>
+      <p style={textStyle}>{tempRating || ""}</p>
     </div>
   );
 };
@@ -52,13 +57,23 @@ const starStyle = {
 
 export const Star = ({
   onRate,
+  onHoverIn,
+  onHoverOut,
   full,
 }: {
   onRate: () => void;
+  onHoverIn: () => void;
+  onHoverOut: () => void;
   full: boolean;
 }) => {
   return (
-    <span role="button" style={starStyle} onClick={onRate}>
+    <span
+      role="button"
+      style={starStyle}
+      onClick={onRate}
+      onMouseEnter={onHoverIn}
+      onMouseLeave={onHoverOut}
+    >
       {full ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
