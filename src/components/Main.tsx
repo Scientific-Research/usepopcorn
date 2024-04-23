@@ -18,23 +18,62 @@ export const Main = ({ children }: { children: React.ReactNode }) => {
 };
 
 // export const ListBox: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
-export const ListBox = ({ children }: { children: React.ReactNode }) => {
-  const [isOpen1, setIsOpen1] = useState(true);
+// export const ListBox = ({ children }: { children: React.ReactNode }) => {
+//   const [isOpen1, setIsOpen1] = useState(true);
+
+//   return (
+//     <div className="box">
+//       <button
+//         className="btn-toggle"
+//         onClick={() => setIsOpen1((open) => !open)}
+//       >
+//         {isOpen1 ? "–" : "+"}
+//       </button>
+
+//       {/* {isOpen1 && <MovieList movies={movies} />} */}
+//       {isOpen1 && children}
+//     </div>
+//   );
+// };
+
+// NOTE: we change the ListBox to a reusable component called Box:
+export const Box = ({ children }: { children: React.ReactNode }) => {
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen1((open) => !open)}
-      >
-        {isOpen1 ? "–" : "+"}
+      <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
+        {isOpen ? "–" : "+"}
       </button>
 
       {/* {isOpen1 && <MovieList movies={movies} />} */}
-      {isOpen1 && children}
+      {isOpen && children}
     </div>
   );
 };
+
+// NOTE: we use the above reusable Box instead of below WatchedBox
+// export const WatchedBox = ({ watched }: { watched: IWatchedMovies[] }) => {
+//   // const [watched, setWatched] = useState(tempWatchedData);
+//   const [isOpen2, setIsOpen2] = useState(true);
+
+//   return (
+//     <div className="box">
+//       <button
+//         className="btn-toggle"
+//         onClick={() => setIsOpen2((open) => !open)}
+//       >
+//         {isOpen2 ? "–" : "+"}
+//       </button>
+//       {isOpen2 && (
+//         <>
+//           <WatchedSummary watched={watched} />
+//           <WatchedMoviesList watched={watched} />
+//         </>
+//       )}
+//     </div>
+//   );
+// };
 
 export const MovieList: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
   // const [movies, setMovies] = useState(tempMovieData);
@@ -60,28 +99,6 @@ export const Movie: React.FC<{ movie: IMovies }> = ({ movie }) => {
         </p>
       </div>
     </li>
-  );
-};
-
-export const WatchedBox = ({ watched }: { watched: IWatchedMovies[] }) => {
-  // const [watched, setWatched] = useState(tempWatchedData);
-  const [isOpen2, setIsOpen2] = useState(true);
-
-  return (
-    <div className="box">
-      <button
-        className="btn-toggle"
-        onClick={() => setIsOpen2((open) => !open)}
-      >
-        {isOpen2 ? "–" : "+"}
-      </button>
-      {isOpen2 && (
-        <>
-          <WatchedSummary watched={watched} />
-          <WatchedMoviesList watched={watched} />
-        </>
-      )}
-    </div>
   );
 };
 

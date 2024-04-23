@@ -1,5 +1,11 @@
 import { Logo, NavBar, NumResults, Search } from "./components/NavBar";
-import { ListBox, Main, MovieList, WatchedBox } from "./components/Main";
+import {
+  Box,
+  Main,
+  MovieList,
+  WatchedMoviesList,
+  WatchedSummary,
+} from "./components/Main";
 import { useState } from "react";
 
 const tempMovieData = [
@@ -73,10 +79,21 @@ export default function App() {
       {/* <Main movies={movies} watched={watched} /> */}
       <Main>
         {/* <ListBox movies={movies}> */}
-        <ListBox>
+        {/* <ListBox> */}
+
+        {/* NOTE: Using the reusable Box for ListBox => we bring this one part inside Box which is not available in Box and send to it the prop directly! */}
+        <Box>
           <MovieList movies={movies} />
-        </ListBox>
-        <WatchedBox watched={watched} />
+        </Box>
+
+        {/* </ListBox> */}
+        {/* <WatchedBox watched={watched} /> */}
+
+        {/* NOTE: Using the reusable Box for WatchedBox => we bring these two parts inside Box which is not available in Box and send them the props directly!*/}
+        <Box>
+          <WatchedSummary watched={watched} />
+          <WatchedMoviesList watched={watched} />
+        </Box>
       </Main>
     </>
   );
