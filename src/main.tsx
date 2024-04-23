@@ -9,5 +9,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     {/* <App /> */}
     <StarRating maxRating={5} />
     <StarRating maxRating={10} />
+    {/* we have to define default value in Typescript as undefined, it doesn't accept null as default value! */}
+    <StarRating maxRating={undefined} />
   </React.StrictMode>
 );

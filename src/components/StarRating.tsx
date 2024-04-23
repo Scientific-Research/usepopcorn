@@ -14,7 +14,11 @@ const textStyle = {
   margin: "0",
 };
 
-export const StarRating = ({ maxRating }: { maxRating: number }) => {
+export const StarRating = ({
+  maxRating = 5, // this is used as default value, when the person doesn't enter a start rating!
+}: {
+  maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
+}) => {
   return (
     <div style={containerStyle}>
       <div style={starContainerStyle}>
