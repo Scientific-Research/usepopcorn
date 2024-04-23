@@ -9,6 +9,11 @@ const starContainerStyle = {
   gap: "4px",
 };
 
+const textStyle = {
+  lineHeight: "1",
+  margin: "0",
+};
+
 export const StarRating = () => {
   return (
     <div style={containerStyle}>
@@ -17,7 +22,7 @@ export const StarRating = () => {
           <span key={i}>S{i + 1}</span>
         ))}
       </div>
-      <p>10</p>
+      <p style={textStyle}>10</p>
     </div>
   );
 };
