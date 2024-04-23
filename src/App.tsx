@@ -56,6 +56,9 @@ export default function App() {
   return (
     <>
       {/* <NavBar movies={movies}> */}
+      {/* NOTE: We have here component composition => composed NavBar with its components and in NavBar page, we write children instead of these subcomponents!
+
+      // NOTE: Our NumResults doesn't get the movies prop from NavBar anymore, rather, it gets it directly from movies state variable above! that's why I have deleted the movies prop from NavBar below! */}
       <NavBar>
         <Logo />
         <Search />
