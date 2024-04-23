@@ -1,4 +1,8 @@
 export interface ITempMovie {
+  children: React.ReactNode;
+}
+
+export interface IMovies {
   imdbID: string;
   Title: string;
   Year: string;

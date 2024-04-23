@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { tempMovieData, tempWatchedData } from "../App";
-import { ITempMovie, ITempWatchedData } from "../Interfaces/interfaces";
+import { tempWatchedData } from "../App";
+import {
+  IMovies, ITempWatchedData
+} from "../Interfaces/interfaces";
 
-export const Main: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+export const Main: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
   return (
     <main className="main">
       <ListBox movies={movies} />
@@ -11,7 +13,7 @@ export const Main: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
   );
 };
 
-export const ListBox: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+export const ListBox: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
   const [isOpen1, setIsOpen1] = useState(true);
 
   return (
@@ -28,7 +30,7 @@ export const ListBox: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
   );
 };
 
-export const MovieList: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+export const MovieList: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
   // const [movies, setMovies] = useState(tempMovieData);
 
   return (
@@ -40,7 +42,7 @@ export const MovieList: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
   );
 };
 
-export const Movie: React.FC<{ movie: ITempMovie }> = ({ movie }) => {
+export const Movie: React.FC<{ movie: IMovies }> = ({ movie }) => {
   return (
     <li>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />

@@ -1,4 +1,4 @@
-import { NavBar } from "./components/NavBar";
+import { Logo, NavBar, NumResults, Search } from "./components/NavBar";
 import { Main } from "./components/Main";
 import { useState } from "react";
 
@@ -54,7 +54,12 @@ export default function App() {
 
   return (
     <>
-      <NavBar movies={movies} />
+      {/* <NavBar movies={movies}> */}
+      <NavBar>
+        <Logo />
+        <Search />
+        <NumResults movies={movies} />
+      </NavBar>
       <Main movies={movies} />
     </>
   );

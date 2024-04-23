@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { ITempMovie } from "../Interfaces/interfaces";
+import { IMovies, ITempMovie } from "../Interfaces/interfaces";
 
-export const NavBar: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+// export const NavBar: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+export const NavBar: React.FC<ITempMovie> = ({ children }) => {
   return (
     <nav className="nav-bar">
-      <Logo />
+      {/* <Logo />
       <Search />
-      <NumResults movies={movies} />
+      <NumResults movies={movies} /> */}
+      {children}
     </nav>
   );
 };
@@ -34,7 +36,9 @@ export const Logo = () => {
   );
 };
 
-export const NumResults: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+// export const NumResults: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
+export const NumResults: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
+  // export const NumResults = ({ movies }: ITempMovie[]) => {
   // const movies = tempMovieData;
 
   return (
