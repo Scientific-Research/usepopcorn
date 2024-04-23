@@ -43,7 +43,7 @@ export const StarRating = ({
       </div>
       {/* <p style={textStyle}>{maxRating}</p> */}
       {/* NOTE: Short circuit sign => || means when the rating is falsy value => we will have   the double quotaion => "" at output, otherwise, we will have rating value at output!*/}
-      <p style={textStyle}>{tempRating || ""}</p>
+      <p style={textStyle}>{tempRating || rating || ""}</p>
     </div>
   );
 };
