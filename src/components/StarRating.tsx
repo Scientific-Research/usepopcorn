@@ -29,7 +29,7 @@ export const StarRating = ({
         {/* {Array.from({ length: 5 }, (_, i) => ( */}
         {Array.from({ length: maxRating }, (_, i) => (
           // <span key={i}>S{i + 1}</span>
-          <Star key={i} />
+          <Star key={i} onRate={() => setRating(i + 1)} />
         ))}
       </div>
       {/* <p style={textStyle}>{maxRating}</p> */}
@@ -46,9 +46,9 @@ const starStyle = {
   cursor: "pointer",
 };
 
-export const Star = () => {
+export const Star = ({ onRate }: { onRate: () => void }) => {
   return (
-    <span role="button" style={starStyle}>
+    <span role="button" style={starStyle} onClick={onRate}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
