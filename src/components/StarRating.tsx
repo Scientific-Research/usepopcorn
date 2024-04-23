@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const containerStyle = {
   display: "flex",
   alignItems: "center",
@@ -6,7 +8,7 @@ const containerStyle = {
 
 const starContainerStyle = {
   display: "flex",
-  gap: "4px",
+  // gap: "4px",
 };
 
 const textStyle = {
@@ -19,6 +21,8 @@ export const StarRating = ({
 }: {
   maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
 }) => {
+  const [rating, setRating] = useState(1);
+
   return (
     <div style={containerStyle}>
       <div style={starContainerStyle}>
@@ -28,7 +32,9 @@ export const StarRating = ({
           <Star key={i} />
         ))}
       </div>
-      <p style={textStyle}>{maxRating}</p>
+      {/* <p style={textStyle}>{maxRating}</p> */}
+      {/* NOTE: Short circuit sign => || means when the rating is falsy value => we will have   the double quotaion => "" at output, otherwise, we will have rating value at output!*/}
+      <p style={textStyle}>{rating || ""}</p>
     </div>
   );
 };
