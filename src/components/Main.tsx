@@ -17,7 +17,8 @@ export const Main = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const ListBox: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
+// export const ListBox: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
+export const ListBox = ({ children }: { children: React.ReactNode }) => {
   const [isOpen1, setIsOpen1] = useState(true);
 
   return (
@@ -29,7 +30,8 @@ export const ListBox: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
         {isOpen1 ? "–" : "+"}
       </button>
 
-      {isOpen1 && <MovieList movies={movies} />}
+      {/* {isOpen1 && <MovieList movies={movies} />} */}
+      {isOpen1 && children}
     </div>
   );
 };

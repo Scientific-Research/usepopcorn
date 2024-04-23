@@ -1,5 +1,5 @@
 import { Logo, NavBar, NumResults, Search } from "./components/NavBar";
-import { ListBox, Main, WatchedBox } from "./components/Main";
+import { ListBox, Main, MovieList, WatchedBox } from "./components/Main";
 import { useState } from "react";
 
 const tempMovieData = [
@@ -72,7 +72,10 @@ export default function App() {
 
       {/* <Main movies={movies} watched={watched} /> */}
       <Main>
-        <ListBox movies={movies} />
+        {/* <ListBox movies={movies}> */}
+        <ListBox>
+          <MovieList movies={movies} />
+        </ListBox>
         <WatchedBox watched={watched} />
       </Main>
     </>
