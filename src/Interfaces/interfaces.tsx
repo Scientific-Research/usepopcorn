@@ -1,7 +1,3 @@
-export interface ITempMovie {
-  children: React.ReactNode;
-}
-
 export interface IMovies {
   imdbID: string;
   Title: string;
@@ -9,7 +5,7 @@ export interface IMovies {
   Poster: string;
 }
 
-export interface ITempWatchedData {
+export interface IWatchedMovies {
   imdbID: string;
   Title: string;
   Year: string;

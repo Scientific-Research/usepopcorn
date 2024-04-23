@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { IMovies, ITempMovie } from "../Interfaces/interfaces";
+import React, { useState } from "react";
+import { IMovies } from "../Interfaces/interfaces";
 
 // export const NavBar: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
-export const NavBar: React.FC<ITempMovie> = ({ children }) => {
+export const NavBar = ({ children }: { children: React.ReactNode }) => {
   return (
     <nav className="nav-bar">
       {/* <Logo />

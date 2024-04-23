@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { tempWatchedData } from "../App";
-import {
-  IMovies, ITempWatchedData
-} from "../Interfaces/interfaces";
+import { IMovies, IWatchedMovies } from "../Interfaces/interfaces";
 
 export const Main: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
   return (
@@ -79,7 +77,7 @@ export const WatchedBox = () => {
   );
 };
 
-export const WatchedSummary: React.FC<{ watched: ITempWatchedData[] }> = ({
+export const WatchedSummary: React.FC<{ watched: IWatchedMovies[] }> = ({
   watched,
 }) => {
   const average = (arr: number[]) =>
@@ -113,7 +111,7 @@ export const WatchedSummary: React.FC<{ watched: ITempWatchedData[] }> = ({
   );
 };
 
-export const WatchedMoviesList: React.FC<{ watched: ITempWatchedData[] }> = ({
+export const WatchedMoviesList: React.FC<{ watched: IWatchedMovies[] }> = ({
   watched,
 }) => {
   return (
@@ -125,7 +123,7 @@ export const WatchedMoviesList: React.FC<{ watched: ITempWatchedData[] }> = ({
   );
 };
 
-const WatchedMovie: React.FC<{ movie: ITempWatchedData }> = ({ movie }) => {
+const WatchedMovie: React.FC<{ movie: IWatchedMovies }> = ({ movie }) => {
   return (
     <li>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
