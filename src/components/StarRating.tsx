@@ -15,10 +15,12 @@ export const StarRating = ({
   maxRating = 5, // this is used as default value, when the person doesn't enter a start rating!
   color = "#fcc419",
   size = 48,
+  className = "",
 }: {
   maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
   color: string;
   size: number;
+  className: string;
 }) => {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
@@ -31,7 +33,7 @@ export const StarRating = ({
   };
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} className={className}>
       <div style={starContainerStyle}>
         {/* {Array.from({ length: 5 }, (_, i) => ( */}
         {Array.from({ length: maxRating }, (_, i) => (
