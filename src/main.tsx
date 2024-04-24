@@ -14,7 +14,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       className=""
       messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
     />
-    <StarRating maxRating={5} color="red" size={24} className="test" />
+    <StarRating
+      maxRating={5}
+      color="red"
+      size={24}
+      className="test"
+      messages={[]}
+    />
     {/* <StarRating maxRating={10} /> */}
     {/* we have to define default value in Typescript as undefined, it doesn't accept null as default value! */}
     {/* <StarRating maxRating={undefined} /> */}

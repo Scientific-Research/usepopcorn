@@ -22,7 +22,7 @@ export const StarRating = ({
   color: string;
   size: number;
   className: string;
-  messages: [];
+  messages: string[];
 }) => {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
