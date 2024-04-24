@@ -11,6 +11,32 @@ const starContainerStyle = {
   // gap: "4px",
 };
 
+// export const Test = ({ rating }: { rating: number }) => {
+export const Test = ({ defaultRating }: { defaultRating: number }) => {
+  // const [movieRating, setMovieRating] = useState(0);
+  const [movieRating, setMovieRating] = useState(defaultRating);
+
+  return (
+    <div>
+      <StarRating
+        // maxRating={undefined}
+        // color={""}
+        size={48}
+        className={""}
+        messages={[]}
+        defaultRating={3}
+        color="blue"
+        maxRating={10}
+        onSetRating={setMovieRating}
+      />
+      {/* NOTE: we can not use rating state variable here instaed of movieRating state variable here directly because rating was defined in StarRating component below and not here! therefore, to access the rating state variable, we define a new state variable here => movieRating and then send it to the StarRating component => onSetRating={setMovieRating} and there, we will set it to the rating in handleRating() function => onSetRating(rating);
+       */}
+      {/* NOTE: at the beginning, we have not rated yet, the rating would be default and when there is not default rating too, we will not display anything => ""! */}
+      <p>This movie was rated {movieRating || defaultRating || ""} stars!</p>
+    </div>
+  );
+};
+
 export const StarRating = ({
   maxRating = 5, // this is used as default value, when the person doesn't enter a start rating!
   color = "#fcc419",
@@ -18,6 +44,7 @@ export const StarRating = ({
   className = "",
   messages = [],
   defaultRating = 0,
+  onSetRating,
 }: {
   maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
   color: string;
@@ -25,6 +52,7 @@ export const StarRating = ({
   className: string;
   messages: string[];
   defaultRating: number;
+  onSetRating: (rating: number) => void;
 }) => {
   // const [rating, setRating] = useState(0);
   const [rating, setRating] = useState(defaultRating);
@@ -37,6 +65,12 @@ export const StarRating = ({
     fontSize: `${size / 1.5}px`,
   };
 
+  const handleRating = (rating: number) => {
+    setRating(rating);
+    // set the rating for Test component indirectly using an intermedite state variable => movieRating
+    onSetRating(rating);
+  };
+
   return (
     <div style={containerStyle} className={className}>
       <div style={starContainerStyle}>
@@ -45,7 +79,7 @@ export const StarRating = ({
           // <span key={i}>S{i + 1}</span>
           <Star
             key={i}
-            onRate={() => setRating(i + 1)}
+            onRate={() => handleRating(i + 1)}
             onHoverIn={() => setTempRating(i + 1)}
             onHoverOut={() => setTempRating(0)}
             full={
@@ -69,6 +103,7 @@ export const StarRating = ({
           ? messages[tempRating ? tempRating - 1 : rating - 1]
           : tempRating || rating || ""}
       </p>
+      {/* <Test rating={rating} /> */}
     </div>
   );
 };
