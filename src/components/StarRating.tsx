@@ -16,11 +16,13 @@ export const StarRating = ({
   color = "#fcc419",
   size = 48,
   className = "",
+  messages = [],
 }: {
   maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
   color: string;
   size: number;
   className: string;
+  messages: [];
 }) => {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
@@ -53,7 +55,17 @@ export const StarRating = ({
       </div>
       {/* <p style={textStyle}>{maxRating}</p> */}
       {/* NOTE: Short circuit sign => || means when the rating is falsy value => we will have   the double quotaion => "" at output, otherwise, we will have rating value at output!*/}
-      <p style={textStyle}>{tempRating || rating || ""}</p>
+
+      {/* NOTE: To have the rating as number */}
+      {/* <p style={textStyle}>{tempRating || rating || ""}</p> */}
+
+      {/* NOTE: to have the rating like amazing, bad, good, ...
+       It works only when the number of stars is equal with the number of elements in the array like googd, bad, amazing, ...*/}
+      <p style={textStyle}>
+        {messages.length === maxRating
+          ? messages[tempRating ? tempRating - 1 : rating - 1]
+          : tempRating || rating || ""}
+      </p>
     </div>
   );
 };
