@@ -17,14 +17,17 @@ export const StarRating = ({
   size = 48,
   className = "",
   messages = [],
+  defaultRating = 0,
 }: {
   maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
   color: string;
   size: number;
   className: string;
   messages: string[];
+  defaultRating: number;
 }) => {
-  const [rating, setRating] = useState(0);
+  // const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
   const textStyle = {

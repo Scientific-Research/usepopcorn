@@ -13,9 +13,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       size={48}
       className=""
       messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
+      defaultRating={3}
     />
     <StarRating
       maxRating={5}
+      defaultRating={3}
       color="red"
       size={24}
       className="test"
