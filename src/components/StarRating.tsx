@@ -11,18 +11,24 @@ const starContainerStyle = {
   // gap: "4px",
 };
 
-const textStyle = {
-  lineHeight: "1",
-  margin: "0",
-};
-
 export const StarRating = ({
   maxRating = 5, // this is used as default value, when the person doesn't enter a start rating!
+  color = "#fcc419",
+  size = 48,
 }: {
   maxRating: number | undefined; // we have to define default value in Typescript as undefined, it doesn't accept null as default value!
+  color: string;
+  size: number;
 }) => {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
+
+  const textStyle = {
+    lineHeight: "1",
+    margin: "0",
+    color: color,
+    fontSize: `${size /1.5}px`,
+  };
 
   return (
     <div style={containerStyle}>
