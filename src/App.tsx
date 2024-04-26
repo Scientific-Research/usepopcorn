@@ -74,6 +74,7 @@ export default function App() {
     setMovies(() => result);
   };
 
+  // NOTE: dependency array: empty [] means => useEffect only runs on mount! => useEffect only runs when App component runs for very first time!
   useEffect(() => {
     getMovie();
   }, []);
