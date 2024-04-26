@@ -58,15 +58,20 @@ const tempWatchedData = [
 const KEY = "27646d5b";
 
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  // const [movies, setMovies] = useState(tempMovieData);
+  const [movies, setMovies] = useState([]);
+  // const [watched, setWatched] = useState(tempWatchedData);
+  const [watched, setWatched] = useState([]);
 
   const getMovie = async () => {
     const res = await fetch(
       `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
     );
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
+    const result = data.Search;
+    console.log(result);
+    setMovies(() => result);
   };
 
   useEffect(() => {
