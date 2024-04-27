@@ -63,22 +63,30 @@ export default function App() {
   // const [watched, setWatched] = useState(tempWatchedData);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const query = "interstellar";
 
   const getMovie = async () => {
-    setIsLoading(true);
-    const res = await fetch(
-      // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
-      `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-    );
-    const data = await res.json();
-    // console.log(data);
-    setMovies(() => data.Search);
-    setIsLoading(false);
-    console.log(movies);
-    // const result = data.Search;
-    // setMovies(() => result);
+    // NOTE: when there is no internet connection => we will get an error in catch section!
+    try {
+      setIsLoading(true);
+      const res = await fetch(
+        // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
+        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+      );
+      if (!res.ok) throw new Error("Something went wring with fetching movies");
+      const data = await res.json();
+      // console.log(data);
+      setMovies(() => data.Search);
+      setIsLoading(false);
+      console.log(movies);
+      // const result = data.Search;
+      // setMovies(() => result);
+    } catch (error: any) {
+      console.log(error.message);
+      setError(error.message);
+    }
   };
 
   // NOTE: dependency array: empty [] means => useEffect only runs on mount! => useEffect only runs when App component runs for very first time!
