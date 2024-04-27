@@ -37,8 +37,8 @@ export const Main = ({ children }: { children: React.ReactNode }) => {
 // };
 
 // NOTE: we change the ListBox to a reusable component called Box:
-// export const Box = ({ children }: { children: React.ReactNode }) => {
-export const Box = ({ element }: { element: React.ReactNode }) => {
+export const Box = ({ children }: { children: React.ReactNode }) => {
+  // export const Box = ({ element }: { element: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -48,8 +48,8 @@ export const Box = ({ element }: { element: React.ReactNode }) => {
       </button>
 
       {/* {isOpen1 && <MovieList movies={movies} />} */}
-      {/* {isOpen && children} */}
-      {isOpen && element}
+      {isOpen && children}
+      {/* {isOpen && element} */}
     </div>
   );
 };

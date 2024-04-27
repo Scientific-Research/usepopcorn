@@ -62,10 +62,12 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   // const [watched, setWatched] = useState(tempWatchedData);
   const [watched, setWatched] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const query = "interstellar";
 
   const getMovie = async () => {
+    setIsLoading(true);
     const res = await fetch(
       // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
       `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
@@ -73,6 +75,7 @@ export default function App() {
     const data = await res.json();
     // console.log(data);
     setMovies(() => data.Search);
+    setIsLoading(false);
     console.log(movies);
     // const result = data.Search;
     // setMovies(() => result);
@@ -82,6 +85,11 @@ export default function App() {
   useEffect(() => {
     getMovie();
   }, []);
+
+  // to show the LOADING word...
+  const Loader = () => {
+    return <p className="loader">Loading...</p>;
+  };
 
   return (
     <>
@@ -107,7 +115,8 @@ export default function App() {
 
         {/* NOTE: OR INSTEAD OF USING CHILDREN, WE CAN DECLARE IT AS EXPLICIT PROP: IN THIS CASE, OUR PROP CALLED element!
         // NOTE: the similar pattern is used by React Router!*/}
-        <Box element={<MovieList movies={movies} />} />
+        {/* <Box element={<MovieList movies={movies} />} /> */}
+        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
 
         {/* NOTE: Using the reusable Box for ListBox => we bring this one part inside Box which is not available in Box and send to it the prop directly! */}
         {/* <Box>
@@ -118,14 +127,18 @@ export default function App() {
         {/* <WatchedBox watched={watched} /> */}
 
         {/* NOTE: THE SAME CONCEPT => SENDING element AS EXPLICIT PROP FOR THIS ONE INSTEAD OF USING CHILDREN:*/}
-        <Box
+        {/* <Box
           element={
             <>
               <WatchedSummary watched={watched} />
               <WatchedMoviesList watched={watched} />
             </>
           }
-        />
+        /> */}
+        <Box>
+          <WatchedSummary watched={watched} />
+          <WatchedMoviesList watched={watched} />
+        </Box>
         {/* NOTE: Using the reusable Box for WatchedBox => we bring these two parts inside Box which is not available in Box and send them the props directly!*/}
         {/* <Box>
           <WatchedSummary watched={watched} />
