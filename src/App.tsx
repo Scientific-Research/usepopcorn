@@ -99,6 +99,16 @@ export default function App() {
     return <p className="loader">Loading...</p>;
   };
 
+  // to show error...
+  const ErrorMessage = ({ message }: { message: string }) => {
+    return (
+      <p className="error">
+        <span>⛔</span>
+        {message}
+      </p>
+    );
+  };
+
   return (
     <>
       {/* NOTE: We have here component composition => composed NavBar with its components and in NavBar page, we write children instead of these subcomponents!
@@ -124,7 +134,12 @@ export default function App() {
         {/* NOTE: OR INSTEAD OF USING CHILDREN, WE CAN DECLARE IT AS EXPLICIT PROP: IN THIS CASE, OUR PROP CALLED element!
         // NOTE: the similar pattern is used by React Router!*/}
         {/* <Box element={<MovieList movies={movies} />} /> */}
-        <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box>
+        {/* <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box> */}
+        <Box>
+          {isLoading && <Loader />}
+          {!isLoading && !error && <MovieList movies={movies} />}
+          {error && <ErrorMessage message={error} />}
+        </Box>
 
         {/* NOTE: Using the reusable Box for ListBox => we bring this one part inside Box which is not available in Box and send to it the prop directly! */}
         {/* <Box>
