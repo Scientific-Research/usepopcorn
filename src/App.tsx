@@ -79,13 +79,16 @@ export default function App() {
       const data = await res.json();
       // console.log(data);
       setMovies(() => data.Search);
-      setIsLoading(false);
       console.log(movies);
       // const result = data.Search;
       // setMovies(() => result);
     } catch (error: any) {
       console.log(error.message);
       setError(error.message);
+
+      // finally section will always be executed! It doesn't matter, whether we are finally in try or catch section. In this case, we will not see the LOADING... message in parallel, when we see the Failed to fetch message on the web!
+    } finally {
+      setIsLoading(false);
     }
   };
 
