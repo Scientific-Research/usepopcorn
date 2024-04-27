@@ -66,6 +66,7 @@ export default function App() {
   const [error, setError] = useState("");
 
   const query = "interstellar";
+  // const query = "lsidhfkjsaf";
 
   const getMovie = async () => {
     // NOTE: when there is no internet connection => we will get an error in catch section!
@@ -75,11 +76,19 @@ export default function App() {
         // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
         `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
       );
+
       if (!res.ok) throw new Error("Something went wring with fetching movies");
+
       const data = await res.json();
-      // console.log(data);
+      console.log(data);
+      // NOTE: All these three below commands work:
+      if (data.Response === "False") throw new Error("Movie not found!");
+      // if (!data.response) throw new Error("Movie not found!");
+      // if (data.Search === undefined) throw new Error("Movie not found!");
+
       setMovies(() => data.Search);
       console.log(movies);
+      // OR:
       // const result = data.Search;
       // setMovies(() => result);
     } catch (error: any) {
