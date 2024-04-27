@@ -63,15 +63,19 @@ export default function App() {
   // const [watched, setWatched] = useState(tempWatchedData);
   const [watched, setWatched] = useState([]);
 
+  const query = "interstellar";
+
   const getMovie = async () => {
     const res = await fetch(
-      `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
+      // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
+      `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
     );
     const data = await res.json();
     // console.log(data);
-    const result = data.Search;
-    console.log(result);
-    setMovies(() => result);
+    setMovies(() => data.Search);
+    console.log(movies);
+    // const result = data.Search;
+    // setMovies(() => result);
   };
 
   // NOTE: dependency array: empty [] means => useEffect only runs on mount! => useEffect only runs when App component runs for very first time!
