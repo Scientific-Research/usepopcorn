@@ -5,6 +5,7 @@ import {
   MovieList,
   WatchedMoviesList,
   WatchedSummary,
+  MovieDetails,
 } from "./components/Main";
 import { useEffect, useState } from "react";
 
@@ -67,6 +68,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedId, setSelectedId] = useState("tt1375666");
 
   // const tempQuery = "interstellar";
   // const query = "interstellar";
@@ -119,7 +121,9 @@ export default function App() {
       if (!res.ok) throw new Error("Something went wrong with fetching movies");
 
       const data = await res.json();
-      console.log(data);
+      // console.log(selectedId);
+      // console.log(data);
+      // console.log(data.Search);
       // NOTE: All these three below commands work:
       if (data.Response === "False") throw new Error("Movie not found!");
       // if (!data.response) throw new Error("Movie not found!");
@@ -131,7 +135,7 @@ export default function App() {
       // const result = data.Search;
       // setMovies(() => result);
     } catch (error: any) {
-      console.log(error.message);
+      // console.log(error.message);
       setError(error.message);
 
       // finally section will always be executed! It doesn't matter, whether we are finally in try or catch section. In this case, we will not see the LOADING... message in parallel, when we see the Failed to fetch message on the web!
@@ -210,8 +214,12 @@ export default function App() {
           }
         /> */}
         <Box>
-          <WatchedSummary watched={watched} />
+         {selectedId ? <MovieDetails selectedId={selectedId}/>: <>
+         <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
+          
+         </>
+          }
         </Box>
         {/* NOTE: Using the reusable Box for WatchedBox => we bring these two parts inside Box which is not available in Box and send them the props directly!*/}
         {/* <Box>

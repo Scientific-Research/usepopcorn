@@ -104,6 +104,12 @@ export const Movie: React.FC<{ movie: IMovies }> = ({ movie }) => {
   );
 };
 
+export const MovieDetails: React.FC<{ selectedId: string }> = ({
+  selectedId,
+}) => {
+  return <div className="detail">{selectedId}</div>;
+};
+
 export const WatchedSummary: React.FC<{ watched: IWatchedMovies[] }> = ({
   watched,
 }) => {
