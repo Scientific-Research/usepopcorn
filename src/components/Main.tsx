@@ -127,10 +127,18 @@ export const Movie = ({
   );
 };
 
-export const MovieDetails: React.FC<{ selectedId: string }> = ({
-  selectedId,
-}) => {
-  return <div className="detail">{selectedId}</div>;
+export const MovieDetails: React.FC<{
+  selectedId: string;
+  setSelectedId: (id: string) => void;
+}> = ({ selectedId, setSelectedId }) => {
+  return (
+    <>
+      <div className="details">{selectedId}</div>
+      <button className="btn-back" onClick={() => setSelectedId("")}>
+        &larr;
+      </button>
+    </>
+  );
 };
 
 export const WatchedSummary: React.FC<{ watched: IWatchedMovies[] }> = ({
