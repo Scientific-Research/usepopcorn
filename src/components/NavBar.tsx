@@ -29,6 +29,7 @@ export const Search = ({
       placeholder="Search movies..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
+      // onChange={(e) => console.log(e.target.value)}
     />
   );
 };

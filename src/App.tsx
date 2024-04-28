@@ -58,6 +58,7 @@ const tempWatchedData = [
 const KEY = "27646d5b";
 
 export default function App() {
+  // const [query, setQuery] = useState("interstellar"); // we have to transfer query and setQuery to search function in NavBar.tsx
   const [query, setQuery] = useState(""); // we have to transfer query and setQuery to search function in NavBar.tsx
 
   // const [movies, setMovies] = useState(tempMovieData);
@@ -67,7 +68,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const tempQuery = "interstellar";
+  // const tempQuery = "interstellar";
+  // const query = "interstellar";
   // const query = "lsidhfkjsaf";
 
   /*
@@ -96,9 +98,10 @@ export default function App() {
     // NOTE: when there is no internet connection => we will get an error in catch section!
     try {
       setIsLoading(true);
+      setError("");
       const res = await fetch(
         // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
-        `http://www.omdbapi.com/?apikey=${KEY}&s=${tempQuery}`
+        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
       );
 
       if (!res.ok) throw new Error("Something went wrong with fetching movies");
@@ -128,7 +131,7 @@ export default function App() {
   // NOTE: dependency array: empty [] means => useEffect only runs on mount! => useEffect only runs when App component runs for very first time!
   useEffect(() => {
     getMovie();
-  }, []);
+  }, [query]); // the getMovie() function will be rendered whenever query value changes => when we type something in input field!
 
   // to show the LOADING word...
   const Loader = () => {
