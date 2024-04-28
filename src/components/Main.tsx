@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IMovies, IWatchedMovies, IMovie } from "../Interfaces/interfaces";
+import { StarRating } from "./StarRating";
 
 // export const Main: React.FC<{
 //   movies: IMovies[];
@@ -206,6 +207,17 @@ export const MovieDetails: React.FC<{
       </header>
 
       <section>
+        <div className="rating">
+          <StarRating
+            maxRating={10}
+            color="#fcc419"
+            size={24}
+            className={""}
+            messages={[]}
+            defaultRating={0}
+            onSetRating={function (rating: number): void {}}
+          />
+        </div>
         <p>
           <em>{plot}</em>
         </p>
