@@ -114,16 +114,26 @@ export const Movie = ({
   setSelectedId: (id: string) => void;
 }) => {
   return (
-    <li onClick={() => setSelectedId(movie.imdbID)}>
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
-      <h3>{movie.Title}</h3>
-      <div>
-        <p>
-          <span>🗓</span>
-          <span>{movie.Year}</span>
-        </p>
-      </div>
-    </li>
+    <>
+      {/* when i click on the name of a Movie, it shows me the ID of that Movie! */}
+      {/* <li onClick={() => setSelectedId(movie.imdbID)}> */}
+      <li
+        onClick={() =>
+          setSelectedId((selectedId) =>
+            movie.imdbID === selectedId ? null : movie.imdbID
+          )
+        }
+      >
+        <img src={movie.Poster} alt={`${movie.Title} poster`} />
+        <h3>{movie.Title}</h3>
+        <div>
+          <p>
+            <span>🗓</span>
+            <span>{movie.Year}</span>
+          </p>
+        </div>
+      </li>
+    </>
   );
 };
 
@@ -134,6 +144,7 @@ export const MovieDetails: React.FC<{
   return (
     <>
       <div className="details">{selectedId}</div>
+      {/* when i click on the back arrow, it will back to the main menu on the right side! */}
       <button className="btn-back" onClick={() => setSelectedId("")}>
         &larr;
       </button>

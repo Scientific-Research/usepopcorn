@@ -1,12 +1,12 @@
 export interface IMovies {
-  imdbID: string;
+  imdbID: string | null;
   Title: string;
   Year: string;
   Poster: string;
 }
 
 export interface IWatchedMovies {
-  imdbID: string;
+  imdbID: string | null;
   Title: string;
   Year: string;
   Poster: string;
