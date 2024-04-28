@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IMovies, IWatchedMovies } from "../Interfaces/interfaces";
+import { IMovies, IWatchedMovies, IMovie } from "../Interfaces/interfaces";
 
 // export const Main: React.FC<{
 //   movies: IMovies[];
@@ -143,7 +143,19 @@ export const MovieDetails: React.FC<{
   selectedId: string | null;
   setSelectedId: (id: string | null) => void;
 }> = ({ selectedId, setSelectedId }) => {
-  const [movie, setMovie] = useState({});
+  const defaultMovie: IMovie = {
+    Title: "",
+    Year: "",
+    Poster: "",
+    Runtime: "",
+    imdbRating: "",
+    Plot: "",
+    Released: "",
+    Actors: "",
+    Director: "",
+    Genre: "",
+  };
+  const [movie, setMovie] = useState<IMovie>(defaultMovie);
 
   const {
     Title: title,

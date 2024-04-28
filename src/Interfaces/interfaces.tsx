@@ -14,3 +14,17 @@ export interface IWatchedMovies {
   imdbRating: number;
   userRating: number;
 }
+
+export interface IMovie {
+  Title: string;
+  Year: string;
+  Poster: string;
+  Runtime: string;
+  imdbRating: string;
+  Plot: string;
+  Released: string;
+  Actors: string;
+  Director: string;
+  Genre: string;
+}
+
