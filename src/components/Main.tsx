@@ -185,13 +185,16 @@ export const MovieDetails: React.FC<{
     getMovieDetails();
   }, [selectedId]); // it renders each time the component renders => using an empty dependency array
   return (
-    <>
-      <div className="details">{selectedId}</div>
-      {/* when i click on the back arrow, it will back to the main menu on the right side! */}
-      <button className="btn-back" onClick={() => setSelectedId("")}>
-        &larr;
-      </button>
-    </>
+    <div className="details">
+      <header>
+        {/* when i click on the back arrow, it will back to the main menu on the right side! */}
+        <button className="btn-back" onClick={() => setSelectedId("")}>
+          &larr;
+        </button>
+        <img src={poster} alt={`Poster of ${movie} movie!`} />
+      </header>
+      {selectedId}
+    </div>
   );
 };
 
