@@ -90,7 +90,7 @@ export const MovieList = ({
   // const [movies, setMovies] = useState(tempMovieData);
 
   return (
-    <ul className="list">
+    <ul className="list list-movies">
       {movies?.map((movie) => (
         <Movie
           movie={movie}
