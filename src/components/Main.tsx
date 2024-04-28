@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IMovies, IWatchedMovies } from "../Interfaces/interfaces";
 
 // export const Main: React.FC<{
@@ -137,10 +137,23 @@ export const Movie = ({
   );
 };
 
+const KEY = "27646d5b";
+
 export const MovieDetails: React.FC<{
   selectedId: string | null;
   setSelectedId: (id: string | null) => void;
 }> = ({ selectedId, setSelectedId }) => {
+  useEffect(() => {
+    const getMovieDetails = async () => {
+      const res = await fetch(
+        // `http://www.omdbapi.com/?apikey=${KEY}&s=${query}` // s for search => query
+        `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}` // i for getting ID
+      );
+      const data = await res.json();
+      console.log(data);
+    };
+    getMovieDetails();
+  }, [selectedId]); // it renders each time the component renders => using an empty dependency array
   return (
     <>
       <div className="details">{selectedId}</div>
