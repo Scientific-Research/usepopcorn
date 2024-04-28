@@ -2,6 +2,24 @@ import React, { useEffect, useState } from "react";
 import { IMovies, IWatchedMovies, IMovie } from "../Interfaces/interfaces";
 import { StarRating } from "./StarRating";
 
+const defaultMovie: IMovie = {
+  Title: "",
+  Year: "",
+  Poster: "",
+  Runtime: "",
+  imdbRating: "",
+  Plot: "",
+  Released: "",
+  Actors: "",
+  Director: "",
+  Genre: "",
+};
+
+// to show the LOADING word...
+const Loader = () => {
+  return <p className="loader">Loading...</p>;
+};
+
 // export const Main: React.FC<{
 //   movies: IMovies[];
 //   watched: IWatchedMovies[];
@@ -144,19 +162,8 @@ export const MovieDetails: React.FC<{
   selectedId: string | null;
   setSelectedId: (id: string | null) => void;
 }> = ({ selectedId, setSelectedId }) => {
-  const defaultMovie: IMovie = {
-    Title: "",
-    Year: "",
-    Poster: "",
-    Runtime: "",
-    imdbRating: "",
-    Plot: "",
-    Released: "",
-    Actors: "",
-    Director: "",
-    Genre: "",
-  };
   const [movie, setMovie] = useState<IMovie>(defaultMovie);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     Title: title,
@@ -171,10 +178,11 @@ export const MovieDetails: React.FC<{
     Genre: genre,
   } = movie;
 
-  console.log(title, year);
+  // console.log(title, year);
 
   useEffect(() => {
     const getMovieDetails = async () => {
+      setIsLoading(true);
       const res = await fetch(
         // `http://www.omdbapi.com/?apikey=${KEY}&s=${query}` // s for search => query
         `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}` // i for getting ID
@@ -182,49 +190,55 @@ export const MovieDetails: React.FC<{
       const data = await res.json();
       // console.log(data);
       setMovie(() => data);
+      setIsLoading(false);
     };
     getMovieDetails();
   }, [selectedId]); // it renders each time the component renders => using an empty dependency array
   return (
     <div className="details">
-      <header>
-        {/* when i click on the back arrow, it will back to the main menu on the right side! */}
-        <button className="btn-back" onClick={() => setSelectedId("")}>
-          &larr;
-        </button>
-        <img src={poster} alt={`Poster of ${movie} movie!`} />
-        <div className="details-overview">
-          <h2>{title}</h2>
-          <p>
-            {released} &bull; {runtime}
-          </p>
-          <p>{genre}</p>
-          <p>
-            <span>⭐</span>
-            {imdbRating} IMDb rating
-          </p>
-        </div>
-      </header>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <header>
+            {/* when i click on the back arrow, it will back to the main menu on the right side! */}
+            <button className="btn-back" onClick={() => setSelectedId("")}>
+              &larr;
+            </button>
+            <img src={poster} alt={`Poster of ${movie} movie!`} />
+            <div className="details-overview">
+              <h2>{title}</h2>
+              <p>
+                {released} &bull; {runtime}
+              </p>
+              <p>{genre}</p>
+              <p>
+                <span>⭐</span>
+                {imdbRating} IMDb rating
+              </p>
+            </div>
+          </header>
 
-      <section>
-        <div className="rating">
-          <StarRating
-            maxRating={10}
-            color="#fcc419"
-            size={24}
-            className={""}
-            messages={[]}
-            defaultRating={0}
-            onSetRating={function (rating: number): void {}}
-          />
-        </div>
-        <p>
-          <em>{plot}</em>
-        </p>
-        <p>Starring {actors}</p>
-        <p>Directed by {director}</p>
-      </section>
-      {/* {selectedId} */}
+          <section>
+            <div className="rating">
+              <StarRating
+                maxRating={10}
+                color="#fcc419"
+                size={24}
+                className={""}
+                messages={[]}
+                defaultRating={0}
+                onSetRating={function (rating: number): void {}}
+              />
+            </div>
+            <p>
+              <em>{plot}</em>
+            </p>
+            <p>Starring {actors}</p>
+            <p>Directed by {director}</p>
+          </section>
+        </>
+      )}
     </div>
   );
 };
