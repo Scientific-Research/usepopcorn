@@ -70,6 +70,28 @@ export default function App() {
   const tempQuery = "interstellar";
   // const query = "lsidhfkjsaf";
 
+  /*
+  useEffect(() => {
+    console.log(
+      "After initial render - render only one time after refresh the page or loading the page for first time!"
+    );
+  }, []);
+  
+  useEffect(() => {
+    console.log(
+      "After every render, it doesn't matter whether refresh or loading the page or changing a state variable or something else - because it doesn't have any dependency bracket!"
+    );
+  });
+  
+  useEffect(() => {
+    console.log(
+      "D => when query state variable changes and only one time after refresh the page or loading the page for first time!"
+    );
+  }, [query]);
+  
+  console.log("During render - render always");
+  */
+
   const getMovie = async () => {
     // NOTE: when there is no internet connection => we will get an error in catch section!
     try {
