@@ -98,12 +98,13 @@ export default function App() {
     // NOTE: when there is no internet connection => we will get an error in catch section!
 
     try {
-      // if (query.length === 0) {
-      // OR
       setIsLoading(true);
       setError("");
 
       // NOTE: when we don't type anything in input field => query.length === 0 => I don't want to see the error => Movie not found!, that's why we set movies and error as default and at the end, do the return => it will not continue to the fetch and go back to the function!
+      // if (query.length === 0) {
+      // OR
+      // if (query.length < 3) {
       if (!query.length) {
         setMovies([]);
         setError("");
