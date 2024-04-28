@@ -143,6 +143,23 @@ export const MovieDetails: React.FC<{
   selectedId: string | null;
   setSelectedId: (id: string | null) => void;
 }> = ({ selectedId, setSelectedId }) => {
+  const [movie, setMovie] = useState({});
+
+  const {
+    Title: title,
+    Year: year,
+    Poster: poster,
+    Runtime: runtime,
+    imdbRating,
+    Plot: plot,
+    Released: released,
+    Actors: actors,
+    Director: director,
+    Genre: genre,
+  } = movie;
+
+  console.log(title, year);
+
   useEffect(() => {
     const getMovieDetails = async () => {
       const res = await fetch(
@@ -150,7 +167,8 @@ export const MovieDetails: React.FC<{
         `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}` // i for getting ID
       );
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
+      setMovie(() => data);
     };
     getMovieDetails();
   }, [selectedId]); // it renders each time the component renders => using an empty dependency array
