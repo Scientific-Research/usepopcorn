@@ -68,7 +68,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedId, setSelectedId] = useState("tt1375666");
+  const [selectedId, setSelectedId] = useState('');
 
   // const tempQuery = "interstellar";
   // const query = "interstellar";
@@ -190,9 +190,16 @@ export default function App() {
         // NOTE: the similar pattern is used by React Router!*/}
         {/* <Box element={<MovieList movies={movies} />} /> */}
         {/* <Box>{isLoading ? <Loader /> : <MovieList movies={movies} />}</Box> */}
+
         <Box>
           {isLoading && <Loader />}
-          {!isLoading && !error && <MovieList movies={movies} />}
+          {!isLoading && !error && (
+            <MovieList
+              movies={movies}
+              selectedId={selectedId}
+              setSelectedId={setSelectedId}
+            />
+          )}
           {error && <ErrorMessage message={error} />}
         </Box>
 
@@ -213,14 +220,18 @@ export default function App() {
             </>
           }
         /> */}
+
         <Box>
-         {selectedId ? <MovieDetails selectedId={selectedId}/>: <>
-         <WatchedSummary watched={watched} />
-          <WatchedMoviesList watched={watched} />
-          
-         </>
-          }
+          {selectedId ? (
+            <MovieDetails selectedId={selectedId} />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedMoviesList watched={watched} />
+            </>
+          )}
         </Box>
+
         {/* NOTE: Using the reusable Box for WatchedBox => we bring these two parts inside Box which is not available in Box and send them the props directly!*/}
         {/* <Box>
           <WatchedSummary watched={watched} />

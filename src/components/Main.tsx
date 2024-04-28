@@ -77,21 +77,44 @@ export const Box = ({ children }: { children: React.ReactNode }) => {
 //   );
 // };
 
-export const MovieList: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
+// export const MovieList: React.FC<{ movies: IMovies[] }> = ({ movies }) => {
+export const MovieList = ({
+  movies,
+  selectedId,
+  setSelectedId,
+}: {
+  movies: IMovies[];
+  selectedId: string;
+  setSelectedId: (id: string) => void;
+}) => {
   // const [movies, setMovies] = useState(tempMovieData);
 
   return (
     <ul className="list">
       {movies?.map((movie) => (
-        <Movie movie={movie} key={movie.imdbID} />
+        <Movie
+          movie={movie}
+          key={movie.imdbID}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+        />
       ))}
     </ul>
   );
 };
 
-export const Movie: React.FC<{ movie: IMovies }> = ({ movie }) => {
+// export const Movie: React.FC<{ movie: IMovies }> = ({ movie }) => {
+export const Movie = ({
+  movie,
+  selectedId,
+  setSelectedId,
+}: {
+  movie: IMovies;
+  selectedId: string;
+  setSelectedId: (id: string) => void;
+}) => {
   return (
-    <li>
+    <li onClick={() => setSelectedId(movie.imdbID)}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div>
