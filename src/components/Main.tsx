@@ -84,8 +84,8 @@ export const MovieList = ({
   setSelectedId,
 }: {
   movies: IMovies[];
-  selectedId: string;
-  setSelectedId: (id: string) => void;
+  selectedId: string | null;
+  setSelectedId: (id: string | null) => void;
 }) => {
   // const [movies, setMovies] = useState(tempMovieData);
 
@@ -110,18 +110,18 @@ export const Movie = ({
   setSelectedId,
 }: {
   movie: IMovies;
-  selectedId: string;
-  setSelectedId: (id: string) => void;
+  selectedId: string | null;
+  setSelectedId: (id: string | null) => void;
 }) => {
   return (
     <>
       {/* when i click on the name of a Movie, it shows me the ID of that Movie! */}
       {/* <li onClick={() => setSelectedId(movie.imdbID)}> */}
+
+      {/* when i click on the name of the movie again, it closes the right window => the Movie ID will disappear OR when i click on the name of a Movie, it shows me the ID of that Movie! */}
       <li
         onClick={() =>
-          setSelectedId((selectedId) =>
-            movie.imdbID === selectedId ? null : movie.imdbID
-          )
+          setSelectedId(movie.imdbID === selectedId ? null : movie.imdbID)
         }
       >
         <img src={movie.Poster} alt={`${movie.Title} poster`} />
@@ -138,8 +138,8 @@ export const Movie = ({
 };
 
 export const MovieDetails: React.FC<{
-  selectedId: string;
-  setSelectedId: (id: string) => void;
+  selectedId: string | null;
+  setSelectedId: (id: string | null) => void;
 }> = ({ selectedId, setSelectedId }) => {
   return (
     <>
