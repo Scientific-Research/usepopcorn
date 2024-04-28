@@ -58,6 +58,8 @@ const tempWatchedData = [
 const KEY = "27646d5b";
 
 export default function App() {
+  const [query, setQuery] = useState(""); // we have to transfer query and setQuery to search function in NavBar.tsx
+
   // const [movies, setMovies] = useState(tempMovieData);
   const [movies, setMovies] = useState([]);
   // const [watched, setWatched] = useState(tempWatchedData);
@@ -65,7 +67,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const query = "interstellar";
+  const tempQuery = "interstellar";
   // const query = "lsidhfkjsaf";
 
   const getMovie = async () => {
@@ -74,10 +76,10 @@ export default function App() {
       setIsLoading(true);
       const res = await fetch(
         // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
-        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+        `http://www.omdbapi.com/?apikey=${KEY}&s=${tempQuery}`
       );
 
-      if (!res.ok) throw new Error("Something went wring with fetching movies");
+      if (!res.ok) throw new Error("Something went wrong with fetching movies");
 
       const data = await res.json();
       console.log(data);
@@ -130,7 +132,7 @@ export default function App() {
       {/* <NavBar movies={movies}> */}
       <NavBar>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </NavBar>
 

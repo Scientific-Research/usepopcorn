@@ -15,9 +15,13 @@ export const NavBar = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const Search = () => {
-  const [query, setQuery] = useState("");
-
+export const Search = ({
+  query,
+  setQuery,
+}: {
+  query: string;
+  setQuery: (f: string) => void;
+}) => {
   return (
     <input
       className="search"
