@@ -71,7 +71,9 @@ export default function App() {
   const [movies, setMovies] = useState([]);
   // const [watched, setWatched] = useState(tempWatchedData);
   // const [watched, setWatched] = useState([]);
-  const [watched, setWatched] = useState([]);
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState<IMovieWatchedCombined[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>("");

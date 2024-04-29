@@ -33,7 +33,7 @@ export interface IMovieWatchedCombined {
   Year: string;
   Poster: string;
   Runtime: string;
-  imdbRating: string;
+  imdbRating: number;
   Plot: string;
   Released: string;
   Actors: string;

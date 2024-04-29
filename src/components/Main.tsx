@@ -12,7 +12,7 @@ const defaultMovie: IMovieWatchedCombined = {
   Year: "",
   Poster: "",
   Runtime: "",
-  imdbRating: "",
+  imdbRating: 0,
   Plot: "",
   Released: "",
   Actors: "",
@@ -20,7 +20,7 @@ const defaultMovie: IMovieWatchedCombined = {
   Genre: "",
   imdbID: null,
   runtime: 0,
-  userRating: 0
+  userRating: 0,
 };
 
 // to show the LOADING word...
@@ -296,12 +296,12 @@ export const WatchedSummary: React.FC<{ watched: IMovieWatchedCombined[] }> = ({
 };
 
 export const WatchedMoviesList: React.FC<{
-  watched: IWatchedMovies[];
+  watched: IMovieWatchedCombined[];
 }> = ({ watched }) => {
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} key={Number(movie.imdbID)} />
+        <WatchedMovie movie={movie} key={movie.imdbID} />
       ))}
     </ul>
   );
