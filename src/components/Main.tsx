@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { IMovies, IWatchedMovies, IMovie } from "../Interfaces/interfaces";
+import {
+  IMovies,
+  IWatchedMovies,
+  IMovie,
+  IMovieWatchedCombined,
+} from "../Interfaces/interfaces";
 import { StarRating } from "./StarRating";
 
-const defaultMovie: IMovie = {
+const defaultMovie: IMovieWatchedCombined = {
   Title: "",
   Year: "",
   Poster: "",
@@ -13,6 +18,9 @@ const defaultMovie: IMovie = {
   Actors: "",
   Director: "",
   Genre: "",
+  imdbID: null,
+  runtime: 0,
+  userRating: 0
 };
 
 // to show the LOADING word...
@@ -161,8 +169,10 @@ const KEY = "27646d5b";
 export const MovieDetails: React.FC<{
   selectedId: string | null;
   setSelectedId: (id: string | null) => void;
-}> = ({ selectedId, setSelectedId }) => {
-  const [movie, setMovie] = useState<IMovie>(defaultMovie);
+  watched: IMovieWatchedCombined[];
+  setWatched: (w: IMovieWatchedCombined[]) => void;
+}> = ({ selectedId, setSelectedId, watched, setWatched }) => {
+  const [movie, setMovie] = useState<IMovieWatchedCombined>(defaultMovie);
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -230,6 +240,12 @@ export const MovieDetails: React.FC<{
                 defaultRating={0}
                 onSetRating={function (rating: number): void {}}
               />
+              <button
+                className="btn-add"
+                onClick={() => setWatched([...watched, movie])}
+              >
+                + Add to list
+              </button>
             </div>
             <p>
               <em>{plot}</em>
@@ -243,13 +259,15 @@ export const MovieDetails: React.FC<{
   );
 };
 
-export const WatchedSummary: React.FC<{ watched: IWatchedMovies[] }> = ({
+export const WatchedSummary: React.FC<{ watched: IMovieWatchedCombined[] }> = ({
   watched,
 }) => {
   const average = (arr: number[]) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
+  const avgImdbRating = average(
+    watched.map((movie) => Number(movie.imdbRating))
+  );
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
   return (
@@ -277,13 +295,13 @@ export const WatchedSummary: React.FC<{ watched: IWatchedMovies[] }> = ({
   );
 };
 
-export const WatchedMoviesList: React.FC<{ watched: IWatchedMovies[] }> = ({
-  watched,
-}) => {
+export const WatchedMoviesList: React.FC<{
+  watched: IWatchedMovies[];
+}> = ({ watched }) => {
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} key={movie.imdbID} />
+        <WatchedMovie movie={movie} key={Number(movie.imdbID)} />
       ))}
     </ul>
   );

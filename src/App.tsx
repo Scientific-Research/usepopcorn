@@ -8,6 +8,11 @@ import {
   MovieDetails,
 } from "./components/Main";
 import { useEffect, useState } from "react";
+import {
+  IMovie,
+  IMovieWatchedCombined,
+  IWatchedMovies,
+} from "./Interfaces/interfaces";
 
 const tempMovieData = [
   {
@@ -65,6 +70,7 @@ export default function App() {
   // const [movies, setMovies] = useState(tempMovieData);
   const [movies, setMovies] = useState([]);
   // const [watched, setWatched] = useState(tempWatchedData);
+  // const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -226,6 +232,8 @@ export default function App() {
             <MovieDetails
               selectedId={selectedId}
               setSelectedId={setSelectedId}
+              watched={watched}
+              setWatched={setWatched}
             />
           ) : (
             <>
