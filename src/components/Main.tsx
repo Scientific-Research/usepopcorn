@@ -223,6 +223,7 @@ export const MovieDetails: React.FC<{
       userRating: 0,
     };
     setWatched([...watched, newWatchedMovie]);
+    setSelectedId(""); // after clicking on the + Add to list, the window will be closed immediatley!
   };
 
   return (
