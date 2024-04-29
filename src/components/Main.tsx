@@ -345,35 +345,54 @@ export const WatchedSummary: React.FC<{ watched: IMovieWatchedCombined[] }> = ({
 
 export const WatchedMoviesList: React.FC<{
   watched: IMovieWatchedCombined[];
-}> = ({ watched }) => {
+  setWatched: (w: IMovieWatchedCombined[]) => void;
+}> = ({ watched, setWatched }) => {
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} key={movie.imdbID} />
+        <WatchedMovie
+          movie={movie}
+          key={movie.imdbID}
+          watched={watched}
+          setWatched={setWatched}
+        />
       ))}
     </ul>
   );
 };
 
-const WatchedMovie: React.FC<{ movie: IWatchedMovies }> = ({ movie }) => {
+const WatchedMovie: React.FC<{
+  movie: IWatchedMovies;
+  watched: IMovieWatchedCombined[];
+  setWatched: (w: IMovieWatchedCombined[]) => void;
+}> = ({ movie, watched, setWatched }) => {
+  const handleDeleteWatched = (id: string | null) => {
+    setWatched(watched.filter((movie) => movie.imdbID !== id));
+  };
   return (
-    <li>
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
-      <h3>{movie.Title}</h3>
-      <div>
-        <p>
-          <span>⭐️</span>
-          <span>{movie.imdbRating}</span>
-        </p>
-        <p>
-          <span>🌟</span>
-          <span>{movie.userRating}</span>
-        </p>
-        <p>
-          <span>⏳</span>
-          <span>{movie.runtime} min</span>
-        </p>
-      </div>
-    </li>
+    <>
+      <li>
+        <img src={movie.Poster} alt={`${movie.Title} poster`} />
+        <h3>{movie.Title}</h3>
+        <div>
+          <p>
+            <span>⭐️</span>
+            <span>{movie.imdbRating}</span>
+          </p>
+          <p>
+            <span>🌟</span>
+            <span>{movie.userRating}</span>
+          </p>
+          <p>
+            <span>⏳</span>
+            <span>{movie.runtime} min</span>
+          </p>
+          <button
+            className="btn-delete"
+            onClick={() => handleDeleteWatched(movie.imdbID)}
+          ></button>
+        </div>
+      </li>
+    </>
   );
 };
