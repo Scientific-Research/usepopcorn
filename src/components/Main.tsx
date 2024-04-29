@@ -204,6 +204,27 @@ export const MovieDetails: React.FC<{
     };
     getMovieDetails();
   }, [selectedId]); // it renders each time the component renders => using an empty dependency array
+
+  // NOTE: when i click on the + Add to list button, it will add this watched movie as a new watched movie to the list of watched movies! => first of all, we have to make a copy of watched because state variable are immutable in React and then we add the new watched film => newWatchedMovie to it!
+  const handleAdd = () => {
+    const newWatchedMovie: IMovieWatchedCombined = {
+      imdbID: selectedId,
+      Title: title,
+      Year: year,
+      Poster: poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ").at(0)),
+      Runtime: "",
+      Plot: "",
+      Released: "",
+      Actors: "",
+      Director: "",
+      Genre: "",
+      userRating: 0,
+    };
+    setWatched([...watched, newWatchedMovie]);
+  };
+
   return (
     <div className="details">
       {isLoading ? (
@@ -242,7 +263,8 @@ export const MovieDetails: React.FC<{
               />
               <button
                 className="btn-add"
-                onClick={() => setWatched([...watched, movie])}
+                // onClick={() => setWatched([...watched, movie])}
+                onClick={handleAdd}
               >
                 + Add to list
               </button>
