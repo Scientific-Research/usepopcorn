@@ -176,11 +176,11 @@ export const MovieDetails: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
 
-  // it shows us, whether our selected watched movie is already in the list of the watched movies or not? when yes, shows us True, otherwise, False
+  // NOTE: it shows us, whether our selected watched movie is already in the list of the watched movies or not? when yes, shows us True, otherwise, False
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   // console.log(isWatched);
 
-  // to find the rating for every movie!
+  // NOTE: to find the rating for every movie!
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
   )?.userRating;
@@ -366,6 +366,7 @@ const WatchedMovie: React.FC<{
   watched: IMovieWatchedCombined[];
   setWatched: (w: IMovieWatchedCombined[]) => void;
 }> = ({ movie, watched, setWatched }) => {
+  // NOTE: a function to delete the watched movie info!
   const handleDeleteWatched = (id: string | null) => {
     setWatched(watched.filter((movie) => movie.imdbID !== id));
   };
