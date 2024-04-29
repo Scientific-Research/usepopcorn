@@ -178,7 +178,12 @@ export const MovieDetails: React.FC<{
 
   // it shows us, whether our selected watched movie is already in the list of the watched movies or not? when yes, shows us True, otherwise, False
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
-  console.log(isWatched);
+  // console.log(isWatched);
+
+  // to find the rating for every movie!
+  const watchedUserRating = watched.find(
+    (movie) => movie.imdbID === selectedId
+  )?.userRating;
 
   const {
     Title: title,
@@ -281,7 +286,10 @@ export const MovieDetails: React.FC<{
                   )}
                 </>
               ) : (
-                <p>You already rated this movie!</p>
+                <p>
+                  You already rated {watchedUserRating} <span>⭐</span> for this
+                  movie!
+                </p>
               )}
             </div>
             <p>
