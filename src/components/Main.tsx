@@ -176,6 +176,10 @@ export const MovieDetails: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
 
+  // it shows us, whether our selected watched movie is already in the list of the watched movies or not? when yes, shows us True, otherwise, False
+  const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+  console.log(isWatched);
+
   const {
     Title: title,
     Year: year,
@@ -254,23 +258,30 @@ export const MovieDetails: React.FC<{
 
           <section>
             <div className="rating">
-              <StarRating
-                maxRating={10}
-                color="#fcc419"
-                size={24}
-                className={""}
-                messages={[]}
-                defaultRating={0}
-                onSetRating={setUserRating} // here we get the user rating and send it to the newWatchedMovie in handleAdd() function!
-              />
-              {userRating > 0 && (
-                <button
-                  className="btn-add"
-                  // onClick={() => setWatched([...watched, movie])}
-                  onClick={handleAdd}
-                >
-                  + Add to list
-                </button>
+              {!isWatched ? (
+                <>
+                  <StarRating
+                    maxRating={10}
+                    color="#fcc419"
+                    size={24}
+                    className={""}
+                    messages={[]}
+                    defaultRating={0}
+                    onSetRating={setUserRating} // here we get the user rating and send it to the newWatchedMovie in handleAdd() function!
+                  />
+
+                  {userRating > 0 && (
+                    <button
+                      className="btn-add"
+                      // onClick={() => setWatched([...watched, movie])}
+                      onClick={handleAdd}
+                    >
+                      + Add to list
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>You already rated this movie!</p>
               )}
             </div>
             <p>
