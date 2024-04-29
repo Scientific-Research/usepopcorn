@@ -174,6 +174,7 @@ export const MovieDetails: React.FC<{
 }> = ({ selectedId, setSelectedId, watched, setWatched }) => {
   const [movie, setMovie] = useState<IMovieWatchedCombined>(defaultMovie);
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState(0);
 
   const {
     Title: title,
@@ -220,7 +221,7 @@ export const MovieDetails: React.FC<{
       Actors: "",
       Director: "",
       Genre: "",
-      userRating: 0,
+      userRating,
     };
     setWatched([...watched, newWatchedMovie]);
     setSelectedId(""); // after clicking on the + Add to list, the window will be closed immediatley!
@@ -260,15 +261,17 @@ export const MovieDetails: React.FC<{
                 className={""}
                 messages={[]}
                 defaultRating={0}
-                onSetRating={function (rating: number): void {}}
+                onSetRating={setUserRating} // here we get the user rating and send it to the newWatchedMovie in handleAdd() function!
               />
-              <button
-                className="btn-add"
-                // onClick={() => setWatched([...watched, movie])}
-                onClick={handleAdd}
-              >
-                + Add to list
-              </button>
+              {userRating > 0 && (
+                <button
+                  className="btn-add"
+                  // onClick={() => setWatched([...watched, movie])}
+                  onClick={handleAdd}
+                >
+                  + Add to list
+                </button>
+              )}
             </div>
             <p>
               <em>{plot}</em>
@@ -286,7 +289,10 @@ export const WatchedSummary: React.FC<{ watched: IMovieWatchedCombined[] }> = ({
   watched,
 }) => {
   const average = (arr: number[]) =>
-    arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+    arr.reduce(
+      (acc, cur, i, arr) => Number((acc + cur / arr.length).toFixed(2)),
+      0
+    );
 
   const avgImdbRating = average(
     watched.map((movie) => Number(movie.imdbRating))
