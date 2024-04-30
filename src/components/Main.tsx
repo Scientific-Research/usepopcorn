@@ -391,9 +391,9 @@ const WatchedMovie: React.FC<{
           <button
             className="btn-delete"
             onClick={() => handleDeleteWatched(movie.imdbID)}
-            title="Delete"
+            // title="Delete"
           >
-            X
+            X<span className="tooltip">Delete</span>
           </button>
         </div>
       </li>
