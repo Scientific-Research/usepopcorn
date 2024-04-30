@@ -391,7 +391,10 @@ const WatchedMovie: React.FC<{
           <button
             className="btn-delete"
             onClick={() => handleDeleteWatched(movie.imdbID)}
-          ></button>
+            title="Delete"
+          >
+            X
+          </button>
         </div>
       </li>
     </>
