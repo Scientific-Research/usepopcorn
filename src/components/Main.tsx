@@ -224,9 +224,11 @@ export const MovieDetails: React.FC<{
     if (!title) return; // when the title is undefined, just return it and doesn't show undefined as title!
     document.title = `Movie | ${title}`;
 
-    // NOTE: to set back the tab from the movie title to its original text => "usePopcorn 🍿" in this useEffect() which is called: CLEANING => this is one solution, another solution is in this page in line 267 => setSelectedId(""),
+    // NOTE: to set back the tab from the movie title to its original text => "usePopcorn 🍿" in this useEffect() which is called: CLEANING happens on Unmount Effect => this is one solution, another solution is in this page in line 267 => setSelectedId(""),
     return () => {
       document.title = "usePopcorn";
+      // when i click on the back arrow => CLEANING happens on Unmount Effect and i will see this below message in console in inspect mode in Browser!
+      console.log(`Clean up effect for movie ${title}`);
     };
   }, [title]);
   // }, [movie.Title]);
