@@ -256,7 +256,12 @@ export const MovieDetails: React.FC<{
         <>
           <header>
             {/* when i click on the back arrow, it will back to the main menu on the right side! */}
-            <button className="btn-back" onClick={() => setSelectedId("")}>
+            <button
+              className="btn-back"
+              onClick={() => {
+                setSelectedId(""), (document.title = "usePopcorn 🍿");
+              }}
+            >
               &larr;
             </button>
             <img src={poster} alt={`Poster of ${movie} movie!`} />
