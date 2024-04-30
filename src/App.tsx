@@ -105,8 +105,8 @@ export default function App() {
   */
 
   const getMovie = async () => {
+    const controller = new AbortController();
     // NOTE: when there is no internet connection => we will get an error in catch section!
-
     try {
       setIsLoading(true);
       setError("");
@@ -123,7 +123,8 @@ export default function App() {
 
       const res = await fetch(
         // `http://www.omdbapi.com/?apikey=${KEY}&s=interstellar`
-        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+        { signal: controller.signal }
       );
 
       if (!res.ok) throw new Error("Something went wrong with fetching movies");
@@ -138,18 +139,27 @@ export default function App() {
       // if (data.Search === undefined) throw new Error("Movie not found!");
 
       setMovies(() => data.Search);
+      setError("");
       // console.log(movies);
       // OR:
       // const result = data.Search;
       // setMovies(() => result);
     } catch (error: any) {
       // console.log(error.message);
-      setError(error.message);
+
+      if (error.name !== "AbortError") {
+        setError(error.message); // we don't get the Abort Error error messages!
+      }
 
       // finally section will always be executed! It doesn't matter, whether we are finally in try or catch section. In this case, we will not see the LOADING... message in parallel, when we see the Failed to fetch message on the web!
     } finally {
       setIsLoading(false);
     }
+
+    // NOTE: CLEANING happens on Unmount Effect => abortion(cancelling) the current HTTP fetch requests untill finishing the fetch requests and only keep the last one which is applicable!
+    return () => {
+      controller.abort();
+    };
   };
 
   // NOTE: dependency array: empty [] means => useEffect only runs on mount! => useEffect only runs when App component runs for very first time!
