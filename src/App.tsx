@@ -145,9 +145,8 @@ export default function App() {
       // const result = data.Search;
       // setMovies(() => result);
     } catch (error: any) {
-      // console.log(error.message);
-
       if (error.name !== "AbortError") {
+        console.log(error.message);
         setError(error.message); // we don't get the Abort Error error messages!
       }
 

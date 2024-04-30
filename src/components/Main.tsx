@@ -228,7 +228,7 @@ export const MovieDetails: React.FC<{
     return () => {
       document.title = "usePopcorn";
       // when i click on the back arrow => CLEANING happens on Unmount Effect and i will see this below message in console in inspect mode in Browser!
-      console.log(`Clean up effect for movie ${title}`);
+      // console.log(`Clean up effect for movie ${title}`);
     };
   }, [title]);
   // }, [movie.Title]);
@@ -263,7 +263,7 @@ export const MovieDetails: React.FC<{
     const addEventListenerCallback = (e: { code: string }) => {
       if (e.code === "Escape") {
         setSelectedId(""); // close movie, when i press the Escape button on Keyboard!
-        console.log("CLOSING");
+        // console.log("CLOSING");
       }
     };
 
