@@ -218,8 +218,9 @@ export const MovieDetails: React.FC<{
   // Note: we add here a useEffect => when i click on a movie name, the name of the movie will be appeared on the Browser tab too!
 
   useEffect(() => {
-    document.title = "TEST";
-  }, []); // only runs one time, when loading the page or when something changes inside useEffect, it will rerender, for example, when i change 'TEST' to 'TEST1' => it will render again(rerender).
+    // document.title = "TEST";
+    document.title = movie.Title;
+  }, [movie]); // only runs one time, when loading the page or when something changes inside useEffect, it will rerender, for example, when i change 'TEST' to 'TEST1' => it will render again(rerender). => at the end, movie as state variable is a dependency element in this array => when we click on a new film, movie will change and therefore, our title will be rerenderd and the title of the filem will change!
 
   // NOTE: when i click on the + Add to list button, it will add this watched movie as a new watched movie to the list of watched movies! => first of all, we have to make a copy of watched because state variable are immutable in React and then we add the new watched film => newWatchedMovie to it!
   const handleAdd = () => {
