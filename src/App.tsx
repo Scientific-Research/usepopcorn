@@ -163,6 +163,7 @@ export default function App() {
 
   // NOTE: dependency array: empty [] means => useEffect only runs on mount! => useEffect only runs when App component runs for very first time!
   useEffect(() => {
+    setSelectedId(""); // to close the current movie window before search a new movie in search field!
     getMovie();
   }, [query]); // the getMovie() function will be rendered whenever query value changes => when we type something in input field!
 
