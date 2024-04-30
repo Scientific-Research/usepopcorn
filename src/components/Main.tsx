@@ -215,6 +215,12 @@ export const MovieDetails: React.FC<{
     getMovieDetails();
   }, [selectedId]); // it renders each time the component renders => using an empty dependency array
 
+  // Note: we add here a useEffect => when i click on a movie name, the name of the movie will be appeared on the Browser tab too!
+
+  useEffect(() => {
+    document.title = "TEST";
+  }, []); // only runs one time, when loading the page or when something changes inside useEffect, it will rerender, for example, when i change 'TEST' to 'TEST1' => it will render again(rerender).
+
   // NOTE: when i click on the + Add to list button, it will add this watched movie as a new watched movie to the list of watched movies! => first of all, we have to make a copy of watched because state variable are immutable in React and then we add the new watched film => newWatchedMovie to it!
   const handleAdd = () => {
     const newWatchedMovie: IMovieWatchedCombined = {

@@ -85,7 +85,7 @@ export default function App() {
   /*
   useEffect(() => {
     console.log(
-      "After initial render - render only one time after refresh the page or loading the page for first time!"
+      "After initial render - render only one time after refresh the page or loading the page for first time!- or when the function inside the useEffect - what we write here - changes => it will render(run again)!"
     );
   }, []);
   
