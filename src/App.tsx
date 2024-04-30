@@ -172,17 +172,6 @@ export default function App() {
     return <p className="loader">Loading...</p>;
   };
 
-  // NOTE: we need this useEffect to close the movie window when i press the Escape on the keyboard:
-  useEffect(() => {
-    // this effect should run on mount: addEventListener is a command in JS DOM and has nothing to do with React!
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Escape") {
-        setSelectedId(""); // close movie, when i press the Escape button on Keyboard!
-        console.log("CLOSING");
-      }
-    });
-  }, []);
-
   // to show error...
   const ErrorMessage = ({ message }: { message: string }) => {
     return (
