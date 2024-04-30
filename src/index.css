@@ -211,19 +211,27 @@ body {
 }
 
 /* tooltip */
-.tooltip {
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-container .tooltip {
   position: absolute;
+  top: -30px; /* Adjust the distance from the icon */
+  left: 50%;
+  transform: translateX(-50%);
   background-color: var(--color-red); /* Customize the color */
   color: var(--color-background-900); /* Customize the text color */
   font-size: 0.9rem;
   font-weight: bold;
-  padding: 0.1rem;
+  padding: 0.5rem;
   border-radius: 4px;
   opacity: 0; /* Initially hidden */
   transition: opacity 0.3s;
 }
 
-.btn-delete:hover .tooltip {
+.icon-container:hover .tooltip {
   opacity: 1; /* Show the tooltip on hover */
 }
 

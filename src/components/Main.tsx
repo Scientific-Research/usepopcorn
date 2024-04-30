@@ -388,12 +388,16 @@ const WatchedMovie: React.FC<{
             <span>⏳</span>
             <span>{movie.runtime} min</span>
           </p>
+
+          {/* Delete trash icon in a red circle */}
           <button
             className="btn-delete"
             onClick={() => handleDeleteWatched(movie.imdbID)}
-            // title="Delete"
+            aria-label="Delete"
+            title="Delete" // this is tooltip, when i hover on the icon, it show the delete word!
           >
-            X<span className="tooltip">Delete</span>
+            <i className="fas fa-trash"></i>
+            <span className="tooltip"></span>
           </button>
         </div>
       </li>
