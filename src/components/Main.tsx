@@ -223,6 +223,11 @@ export const MovieDetails: React.FC<{
     // document.title = `Movie | ${movie.Title}`; OR
     if (!title) return; // when the title is undefined, just return it and doesn't show undefined as title!
     document.title = `Movie | ${title}`;
+
+    // NOTE: to set back the tab from the movie title to its original text => "usePopcorn 🍿" in this useEffect() which is called: CLEANING => this is one solution, another solution is in this page in line 267 => setSelectedId(""),
+    return () => {
+      document.title = "usePopcorn";
+    };
   }, [title]);
   // }, [movie.Title]);
   // only runs one time, when loading the page or when something changes inside useEffect, it will rerender, for example, when i change 'TEST' to 'TEST1' => it will render again(rerender). => at the end, movie as state variable is a dependency element in this array => when we click on a new film, movie will change and therefore, our title will be rerenderd and the title of the filem will change!
@@ -258,9 +263,11 @@ export const MovieDetails: React.FC<{
             {/* when i click on the back arrow, it will back to the main menu on the right side! */}
             <button
               className="btn-back"
-              onClick={() => {
-                setSelectedId(""), (document.title = "usePopcorn 🍿");
-              }}
+              // onClick={() => {
+              //   setSelectedId(""),
+              //   (document.title = "usePopcorn 🍿"); // NOTE: to set back the tab from the movie title to its original text: "usePopcorn 🍿" => this is one solution, another solution is in useEffect() in this page line 227-229
+              // }}
+              onClick={() => setSelectedId("")}
             >
               &larr;
             </button>
