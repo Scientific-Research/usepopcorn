@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { IMovies } from "../Interfaces/interfaces";
 
 // export const NavBar: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {
@@ -22,15 +22,28 @@ export const Search = ({
   query: string;
   setQuery: (f: string) => void;
 }) => {
+  // NOTE: using useRef and ref to get the focus in input filed whenever the page is reloading:
+  const inputEl = useRef<HTMLInputElement | null>(null); // Specify the type as HTMLInputElement or null
+
+  useEffect(() => {
+    // console.log(inputEl.current); // NOTE: this is the DOM element itself as follows:
+    // <input class="search" type="text" placeholder="Search movies..." value="">
+
+    // if (inputEl.current !== null) { OR
+    if (inputEl.current) {
+      inputEl.current.focus();
+    }
+  }, []);
   return (
     <input
       className="search"
       type="text"
       placeholder="Search movies..."
       value={query}
-      autoFocus
+      // autoFocus // NOTE: we use refs in React to do the same job like autoFocus, that's why i commented this method here: => autoFocus - using Refs to get the focus is above!
       onChange={(e) => setQuery(e.target.value)}
       // onChange={(e) => console.log(e.target.value)}
+      ref={inputEl}
     />
   );
 };
