@@ -31,6 +31,12 @@ export default function App() {
   const [watched, setWatched] = useState(() => {
     const storedValue = localStorage.getItem("watched") as string;
     return JSON.parse(storedValue); // to convert the storedValue as string to an object => we use JSON.parse() function.
+
+    // NOTE: JSON.stringify() => to convert an object to a JSON string
+    const a = JSON.stringify(storedValue);
+
+    // NOTE: JSON.parse() => to convert a JOSN string to an object
+    const b = JSON.parse(storedValue);
   });
 
   const [isLoading, setIsLoading] = useState(false);
