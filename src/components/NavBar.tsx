@@ -26,13 +26,20 @@ export const Search = ({
   const inputEl = useRef<HTMLInputElement | null>(null); // Specify the type as HTMLInputElement or null
 
   useEffect(() => {
-    // console.log(inputEl.current); // NOTE: this is the DOM element itself as follows:
-    // <input class="search" type="text" placeholder="Search movies..." value="">
+    const callback = (e: { code: string }) => {
+      // console.log(inputEl.current); // NOTE: this is the DOM element itself as follows:
+      // <input class="search" type="text" placeholder="Search movies..." value="">
 
-    // if (inputEl.current !== null) { OR
-    if (inputEl.current) {
-      inputEl.current.focus();
-    }
+      // if (inputEl.current !== null) { OR
+      if (inputEl.current) {
+        if (e.code === "Enter") {
+          inputEl.current.focus(); // when we press Enter for the first time, then makes the focus in the input field!
+          setQuery(""); // the second enter will delete the input field!
+        }
+      }
+    };
+    document.addEventListener("keydown", callback);
+    return () => document.addEventListener("keydown", callback);
   }, []);
   return (
     <input
