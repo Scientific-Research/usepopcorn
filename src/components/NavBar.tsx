@@ -42,7 +42,8 @@ export const Search = ({
     };
     document.addEventListener("keydown", callback);
     return () => document.addEventListener("keydown", callback);
-  }, []);
+  }, [setQuery]);
+
   return (
     <input
       className="search"
