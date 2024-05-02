@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   IMovies,
-  IWatchedMovies, IMovieWatchedCombined
+  IWatchedMovies,
+  IMovieWatchedCombined,
 } from "../Interfaces/interfaces";
 import { StarRating } from "./StarRating";
 
@@ -263,15 +264,6 @@ export const MovieDetails: React.FC<{
     //);
   };
 
-  // NOTE: second solution using useEffect to store the watched movies in local storage in the browser! the first method is above!
-  useEffect(() => {
-    localStorage.setItem(
-      "watched",
-      // NOTE: JSON.stringify([...watched, newWatchedMovie]) => we don't need this here anymore, because we have the updated value for wateched movie as a state variable => watched and we just need to use that here!
-      JSON.stringify(watched)
-    );
-  }, [watched]); // to run this useEffect, each time the watched state variable is updated!
-
   // NOTE: we need this useEffect to close the movie window when i press the Escape on the keyboard:
   useEffect(() => {
     // this effect should run on mount: addEventListener is a command in JS DOM and has nothing to do with React!
@@ -433,8 +425,15 @@ const WatchedMovie: React.FC<{
 }> = ({ movie, watched, setWatched }) => {
   // NOTE: a function to delete the watched movie info!
   const handleDeleteWatched = (id: string | null) => {
-    setWatched(watched.filter((movie) => movie.imdbID !== id));
+    // setWatched(watched.filter((movie) => movie.imdbID !== id));
+    const updatedWatechedMovie = watched.filter((movie) => movie.imdbID !== id);
+    setWatched(updatedWatechedMovie);
+
+    // NOTE: In App.tsx, there is the first method using useEffect and here is the second method: without using useEffect. I used the first method, that's why i comment the below statement as second method out:
+    // Update local storage with the new watched list
+    // localStorage.setItem("watched", JSON.stringify(updatedWatechedMovie));
   };
+
   return (
     <>
       <li>

@@ -37,6 +37,15 @@ export default function App() {
     // const b = JSON.parse(storedValue);
   });
 
+  // NOTE: second solution using useEffect to store the watched movies in local storage in the browser! the first method is above!
+  useEffect(() => {
+    localStorage.setItem(
+      "watched",
+      // NOTE: JSON.stringify([...watched, newWatchedMovie]) => we don't need this here anymore, because we have the updated value for wateched movie as a state variable => watched and we just need to use that here!
+      JSON.stringify(watched)
+    );
+  }, [watched]); // to run this useEffect, each time the watched state variable is updated!
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>("");
