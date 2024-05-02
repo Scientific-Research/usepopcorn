@@ -25,7 +25,13 @@ export default function App() {
   // const [watched, setWatched] = useState(tempWatchedData);
   // const [watched, setWatched] = useState([]);
   // const [watched, setWatched] = useState([]);
-  const [watched, setWatched] = useState<IMovieWatchedCombined[]>([]);
+
+  // const [watched, setWatched] = useState<IMovieWatchedCombined[]>([]);
+  // NOTE: the initial value here would be getting the item from local storage and display them in browser only for first time when the page reloads. => so, here is the best place to do that!
+  const [watched, setWatched] = useState(() => {
+    const storedValue = localStorage.getItem("watched") as string;
+    return JSON.parse(storedValue); // to convert the storedValue as string to an object => we use JSON.parse() function.
+  });
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
