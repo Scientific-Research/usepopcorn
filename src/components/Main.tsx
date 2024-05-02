@@ -253,6 +253,12 @@ export const MovieDetails: React.FC<{
     };
     setWatched([...watched, newWatchedMovie]);
     setSelectedId(""); // after clicking on the + Add to list, the window will be closed immediatley!
+
+    // NOTE: above, we added the movie to the list of movies and now, we want to store the watched movies to local storage which is setItem(key,value) in Web browsers and only available for current URL => http://localhost:5173/ and not for other one:
+    localStorage.setItem(
+      "watched",
+      JSON.stringify([...watched, newWatchedMovie]) // NOTE: both the key and value should be string, that's why i used JSON.stringify() to convert the array of objects: IMovieWatchedCombined to string and now both sides are string and can be stored in local storage in the Browsers!
+    );
   };
 
   // NOTE: we need this useEffect to close the movie window when i press the Escape on the keyboard:
