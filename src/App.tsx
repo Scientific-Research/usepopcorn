@@ -8,11 +8,6 @@ import {
   MovieDetails,
 } from "./components/Main";
 import { useEffect, useState } from "react";
-import {
-  IMovie,
-  IMovieWatchedCombined,
-  IWatchedMovies,
-} from "./Interfaces/interfaces";
 
 const KEY = "27646d5b";
 

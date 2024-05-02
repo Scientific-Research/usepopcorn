@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { IMovies } from "../Interfaces/interfaces";
 
 // export const NavBar: React.FC<{ movies: ITempMovie[] }> = ({ movies }) => {

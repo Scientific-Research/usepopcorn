@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   IMovies,
-  IWatchedMovies,
-  IMovie,
-  IMovieWatchedCombined,
+  IWatchedMovies, IMovieWatchedCombined
 } from "../Interfaces/interfaces";
 import { StarRating } from "./StarRating";
 
