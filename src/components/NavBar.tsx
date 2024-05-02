@@ -27,6 +27,8 @@ export const Search = ({
 
   useEffect(() => {
     const callback = (e: { code: string }) => {
+      // NOTE: when cursor is in input field, and i press the Enter again, it will not delete the word in input filed, rather, the focus stays there. But when the focus is not in the input filed anymore and i press the Enter for second time, it will clear the word in the input field!
+      if (document.activeElement === inputEl.current) return;
       // console.log(inputEl.current); // NOTE: this is the DOM element itself as follows:
       // <input class="search" type="text" placeholder="Search movies..." value="">
 
