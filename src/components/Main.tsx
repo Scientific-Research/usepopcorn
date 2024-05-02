@@ -235,31 +235,44 @@ export const MovieDetails: React.FC<{
   // only runs one time, when loading the page or when something changes inside useEffect, it will rerender, for example, when i change 'TEST' to 'TEST1' => it will render again(rerender). => at the end, movie as state variable is a dependency element in this array => when we click on a new film, movie will change and therefore, our title will be rerenderd and the title of the filem will change!
 
   // NOTE: when i click on the + Add to list button, it will add this watched movie as a new watched movie to the list of watched movies! => first of all, we have to make a copy of watched because state variable are immutable in React and then we add the new watched film => newWatchedMovie to it!
+
+  const newWatchedMovie: IMovieWatchedCombined = {
+    imdbID: selectedId,
+    Title: title,
+    Year: year,
+    Poster: poster,
+    imdbRating: Number(imdbRating),
+    runtime: Number(runtime.split(" ").at(0)),
+    Runtime: "",
+    Plot: "",
+    Released: "",
+    Actors: "",
+    Director: "",
+    Genre: "",
+    userRating,
+  };
+
   const handleAdd = () => {
-    const newWatchedMovie: IMovieWatchedCombined = {
-      imdbID: selectedId,
-      Title: title,
-      Year: year,
-      Poster: poster,
-      imdbRating: Number(imdbRating),
-      runtime: Number(runtime.split(" ").at(0)),
-      Runtime: "",
-      Plot: "",
-      Released: "",
-      Actors: "",
-      Director: "",
-      Genre: "",
-      userRating,
-    };
-    setWatched([...watched, newWatchedMovie]);
+    const addedNewWatchedMovie = [...watched, newWatchedMovie];
+    setWatched(addedNewWatchedMovie);
     setSelectedId(""); // after clicking on the + Add to list, the window will be closed immediatley!
 
     // NOTE: above, we added the movie to the list of movies and now, we want to store the watched movies to local storage which is setItem(key,value) in Web browsers and only available for current URL => http://localhost:5173/ and not for other one:
+    // localStorage.setItem(
+    //   "watched",
+    //   JSON.stringify([...watched, newWatchedMovie]) // NOTE: both the key and value should be string, that's why i used JSON.stringify() to convert the array of objects: IMovieWatchedCombined to string and now both sides are string and can be stored in local storage in the Browsers!
+    // NOTE: this was the first solution to write the local storage code here, the second solution is that to write the code for local storage in a useEffect() below: that's why i comment it out here. Write local storage code in a useEffect is better, because it would be reusable!
+    //);
+  };
+
+  // NOTE: second solution using useEffect to store the watched movies in local storage in the browser! the first method is above!
+  useEffect(() => {
     localStorage.setItem(
       "watched",
-      JSON.stringify([...watched, newWatchedMovie]) // NOTE: both the key and value should be string, that's why i used JSON.stringify() to convert the array of objects: IMovieWatchedCombined to string and now both sides are string and can be stored in local storage in the Browsers!
+      // NOTE: JSON.stringify([...watched, newWatchedMovie]) => we don't need this here anymore, because we have the updated value for wateched movie as a state variable => watched and we just need to use that here!
+      JSON.stringify(watched)
     );
-  };
+  }, [watched]); // to run this useEffect, each time the watched state variable is updated!
 
   // NOTE: we need this useEffect to close the movie window when i press the Escape on the keyboard:
   useEffect(() => {
