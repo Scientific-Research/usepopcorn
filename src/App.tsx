@@ -37,6 +37,13 @@ export default function App() {
     // const b = JSON.parse(storedValue);
   });
 
+  // NOTE: above, we added the movie to the list of movies and now, we want to store the watched movies to local storage which is setItem(key,value) in Web browsers and only available for current URL => http://localhost:5173/ and not for other one:
+  // localStorage.setItem(
+  //   "watched",
+  //   JSON.stringify([...watched, newWatchedMovie]) // NOTE: both the key and value should be string, that's why i used JSON.stringify() to convert the array of objects: IMovieWatchedCombined to string and now both sides are string and can be stored in local storage in the Browsers!
+  // NOTE: this was the first solution to write the local storage code here, the second solution is that to write the code for local storage in a useEffect() below: that's why i comment it out here. Write local storage code in a useEffect is better, because it would be reusable!
+  //);
+
   // NOTE: second solution using useEffect to store the watched movies in local storage in the browser! the first method is above!
   useEffect(() => {
     localStorage.setItem(
