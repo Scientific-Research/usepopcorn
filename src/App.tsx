@@ -30,7 +30,10 @@ export default function App() {
   // NOTE: the initial value here would be getting the item from local storage and display them in browser only for first time when the page reloads. => so, here is the best place to do that!
   const [watched, setWatched] = useState(() => {
     const storedValue = localStorage.getItem("watched") as string;
-    return JSON.parse(storedValue); // to convert the storedValue as string to an object => we use JSON.parse() function.
+
+    // NOTE: when there is not a watched movie in the arrayat the beginning, it would be null and we get an error, to avoid such error, we use ternary operator to assign an empty bracet[].
+    const parsedValue = storedValue ? JSON.parse(storedValue) : []; // to convert the storedValue as string to an object => we use JSON.parse() function.
+    return parsedValue;
 
     // NOTE: JSON.stringify() => to convert an object to a JSON string
     // const a = JSON.stringify(storedValue);
@@ -53,19 +56,19 @@ export default function App() {
       "After initial render - render only one time after refresh the page or loading the page for first time!- or when the function inside the useEffect - what we write here - changes => it will render(run again)!"
     );
   }, []);
-  
+
   useEffect(() => {
     console.log(
       "After every render, it doesn't matter whether refresh or loading the page or changing a state variable or something else - because it doesn't have any dependency bracket!"
     );
   });
-  
+
   useEffect(() => {
     console.log(
       "D => when query state variable changes and only one time after refresh the page or loading the page for first time!"
     );
   }, [query]);
-  
+
   console.log("During render - render always");
   */
 
