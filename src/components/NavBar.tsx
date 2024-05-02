@@ -28,6 +28,7 @@ export const Search = ({
       type="text"
       placeholder="Search movies..."
       value={query}
+      autoFocus
       onChange={(e) => setQuery(e.target.value)}
       // onChange={(e) => console.log(e.target.value)}
     />
