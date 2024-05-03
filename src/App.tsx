@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { useMovies } from "./hooks/useMovies";
 import { useLocalStorageState } from "./hooks/useLocalStorageState";
+import { useKey } from "./hooks/useKey";
 
 const KEY = "27646d5b";
 
@@ -24,6 +25,9 @@ export default function App() {
   // NOTE: calling this CUSTOM HOOK like a useState() for watched and setWatched: empty array here is initialstate and I will replace initialstate instead of [] in useLocalStorageState custom hook. Key is "watched".
   const [watched, setWatched] = useLocalStorageState([], "watched");
   // const [watched, setWatched] = useState([]);
+
+  // NOTE: CALLING THE THIRD CUSTOM HOOK:
+  useKey("Escape", setSelectedId);
 
   // const [movies, setMovies] = useState(tempMovieData);
   // const [watched, setWatched] = useState(tempWatchedData);

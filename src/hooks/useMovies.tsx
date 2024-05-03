@@ -6,7 +6,7 @@ const KEY = "27646d5b";
 export const useMovies = (
   query: string,
   // setSelectedId: (s: string) => void
-  callback: (s: string) => void // NOTE: change the name to callback to make it as reusable by other components too!
+  callback: (id: string) => void // NOTE: change the name to callback to make it as reusable by other components too!
 ) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
