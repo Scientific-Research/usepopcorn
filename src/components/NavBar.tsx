@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { IMovies } from "../Interfaces/interfaces";
 import { useKey } from "../hooks/useKey";
 
@@ -26,7 +26,7 @@ export const Search = ({
   // NOTE: using useRef and ref to get the focus in input filed whenever the page is reloading:
   const inputEl = useRef<HTMLInputElement | null>(null); // Specify the type as HTMLInputElement or null
 
-  // NOTE: instead of using following useEffect for Enter key, i use the REUSABLE CUSTOM HOOK => from useKeys.tsx, Important note is: the ation here is not only setQuery, rather, some statements which have to be adapted to the original Code!
+  // NOTE: instead of using following useEffect for Enter key, i use the REUSABLE CUSTOM HOOK => from useKeys.tsx, Important note is: the action here is not only setQuery, rather, some statements which have to be adapted to the original Code!
   useKey("Enter", () => {
     if (document.activeElement === inputEl.current) return;
     if (inputEl.current) {
