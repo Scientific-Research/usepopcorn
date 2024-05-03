@@ -179,7 +179,9 @@ export const MovieDetails: React.FC<{
   const countRef = useRef(0);
 
   useEffect(() => {
-    if (userRating) countRef.current = countRef.current + 1;
+    // if (userRating) countRef.current = countRef.current + 1; OR
+    // if (userRating) countRef.current += 1; OR
+    if (userRating) countRef.current++;
   }, [userRating]);
 
   // NOTE: it shows us, whether our selected watched movie is already in the list of the watched movies or not? when yes, shows us True, otherwise, False
