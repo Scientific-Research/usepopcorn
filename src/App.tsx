@@ -21,7 +21,7 @@ export default function App() {
   // NOTE: calling the useMovies.tsx as CUSTOM HOOK with two inputs and getting three outputs: in fact, useMovies(query, setSelectedId) send us back an object containing three arguments which we extract them using deconstructuring!
   const { movies, isLoading, error } = useMovies(query, setSelectedId);
 
-  // NOTE: calling this CUSTOM HOOK like a useState() for watched and setWatched:
+  // NOTE: calling this CUSTOM HOOK like a useState() for watched and setWatched: empty array here is initialstate and I will replace initialstate instead of [] in useLocalStorageState custom hook. Key is "watched".
   const [watched, setWatched] = useLocalStorageState([], "watched");
   // const [watched, setWatched] = useState([]);
 

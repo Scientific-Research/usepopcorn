@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // NOTE: creating a reusable custom hook to set and get the watched movie in local storage
-export const useLocalStorageState = (initialState: unknown[], key: string) => {
+export const useLocalStorageState = (initialState: [], key: string) => {
   // const [watched, setWatched] = useState<IMovieWatchedCombined[]>([]);
   // NOTE: the initial value here would be getting the item from local storage and display them in browser only for first time when the page reloads. => so, here is the best place to do that!
   // const [watched, setWatched] = useState(() => {
@@ -10,7 +10,8 @@ export const useLocalStorageState = (initialState: unknown[], key: string) => {
     const storedValue = localStorage.getItem(key) as string;
 
     // NOTE: when there is not a watched movie in the array at the beginning, it would be null and we get an error, to avoid such error, we use ternary operator to assign an empty bracet[].
-    const parsedValue = storedValue ? JSON.parse(storedValue) : []; // to convert the storedValue as string to an object => we use JSON.parse() function.
+    // const parsedValue = storedValue ? JSON.parse(storedValue) : []; // to convert the storedValue as string to an object => we use JSON.parse() function.
+    const parsedValue = storedValue ? JSON.parse(storedValue) : initialState; // to convert the storedValue as string to an object => we use JSON.parse() function.
     return parsedValue;
 
     // NOTE: JSON.stringify() => to convert an object to a JSON string
