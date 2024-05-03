@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   IMovies,
   IWatchedMovies,
@@ -20,6 +20,7 @@ const defaultMovie: IMovieWatchedCombined = {
   imdbID: null,
   runtime: 0,
   userRating: 0,
+  countRatingDecisions: 0,
 };
 
 // to show the LOADING word...
@@ -175,6 +176,12 @@ export const MovieDetails: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
 
+  const countRef = useRef(0);
+
+  useEffect(() => {
+    if (userRating) countRef.current = countRef.current + 1;
+  }, [userRating]);
+
   // NOTE: it shows us, whether our selected watched movie is already in the list of the watched movies or not? when yes, shows us True, otherwise, False
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   // console.log(isWatched);
@@ -249,6 +256,7 @@ export const MovieDetails: React.FC<{
     Director: "",
     Genre: "",
     userRating,
+    countRatingDecisions: countRef.current,
   };
 
   const handleAdd = () => {

@@ -42,4 +42,5 @@ export interface IMovieWatchedCombined {
   imdbID: string | null;
   runtime: number;
   userRating: number;
+  countRatingDecisions: number;
 }
