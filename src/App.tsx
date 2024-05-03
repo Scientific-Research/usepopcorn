@@ -17,7 +17,7 @@ export default function App() {
   const [query, setQuery] = useState(""); // we have to transfer query and setQuery to search function in NavBar.tsx
   const [selectedId, setSelectedId] = useState<string | null>("");
 
-  // NOTE: calling the useMovies.tsx as custom hook with two inputs and getting three outputs: in fact, useMovies(query, setSelectedId) send us back an object containing three arguments which we extract them using deconstructuring!
+  // NOTE: calling the useMovies.tsx as CUSTOM HOOK with two inputs and getting three outputs: in fact, useMovies(query, setSelectedId) send us back an object containing three arguments which we extract them using deconstructuring!
   const { movies, isLoading, error } = useMovies(query, setSelectedId);
 
   // const [movies, setMovies] = useState(tempMovieData);

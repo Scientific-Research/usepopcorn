@@ -5,7 +5,8 @@ const KEY = "27646d5b";
 // NOTE: useMovies as a custom hook is indeed a function which accepts argument as input and it is not a component which accepts props as input!
 export const useMovies = (
   query: string,
-  setSelectedId: (s: string) => void
+  // setSelectedId: (s: string) => void
+  callback: (s: string) => void // NOTE: change the name to callback to make it as reusable by other components too!
 ) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,7 +71,10 @@ export const useMovies = (
 
   // NOTE: dependency array: empty [] means => useEffect only runs on mount! => useEffect only runs when App component runs for very first time!
   useEffect(() => {
-    setSelectedId(""); // to close the current movie window before search a new movie in search field!
+    // setSelectedId(""); // to close the current movie window before search a new movie in search field!
+    callback?.(""); // NOTE: change the name to callback to make it as reusable by other components too! .? means OPTIONAL CHAINING, without this, we have to test it manually firstly, if it exists => if(callback) callback("")=> I will call it only when it exists => do the (""), otherwise, it doesn't exists, don't call it!
+    // NOTE: how to test WITHOUT OPTIONAL CHAINING: => optional chaining does the same but in a much more convenient way:
+    // if (callback) callback("");
     getMovie();
   }, [query]); // the getMovie() function will be rendered whenever query value changes => when we type something in input field!
 
