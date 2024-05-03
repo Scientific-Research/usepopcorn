@@ -21,6 +21,7 @@ const defaultMovie: IMovieWatchedCombined = {
   runtime: 0,
   userRating: 0,
   countRatingDecisions: 0,
+  count: 0,
 };
 
 // to show the LOADING word...
@@ -166,6 +167,18 @@ export const Movie = ({
 
 const KEY = "27646d5b";
 
+let count = 0; // NOTE: when i define the variable as normal variable and not state variable, i have to define it here i.e. outside of MovieDetails function. It works well like countRef as a useRef but when i select another movie, because it was defined outside the function, it will not be reseted and it will countinue to count from last value which was stored for the last movie, and therefore, we will not have a separate count for every movie --- In contrast, with countRef as useRef, it will not store the number of click for ratings for all the movies, rather it will be reseted every time that we reload the page and store the number of every clicks separately!
+
+// NOTE: RESULT: PREFERABLY IS TO USE USEREF VARIABLE INSTEAD OF NORMAL VARIABLE!
+
+/* 
+-1 STATE: DOES BOTH OF THESE THINGS => IT IS PERSISTENT ACROSS RENDERS and IT TRIGGER A RE-RENDER WHEN UPDATED!
+
+-2 IN THE MIDDLE, WE HAVE REF => IT IS PERSISTENT ACROSS RENDERS but IT DOESN'T TRIGGER A RE-RENDER WHEN UPDATED! => THAT'S WHY WE DON'T USE REF IN JSX OUTPUT!
+
+-3 NORMAL VARIABLE: NORMAL VARIABLE: NOT PERSISTENT ACROSS RENDERS and IT DOESN'T TRIGGER A RE-RENDER WHEN UPDATED!
+*/
+
 export const MovieDetails: React.FC<{
   selectedId: string | null;
   setSelectedId: (id: string | null) => void;
@@ -176,13 +189,14 @@ export const MovieDetails: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
 
-  const countRef = useRef(0);
+  const countRef = useRef(0); // will be reseted like state when page reloads or initialization!
 
   useEffect(() => {
     // if (userRating) countRef.current = countRef.current + 1; OR
     // if (userRating) countRef.current += 1; OR
     if (userRating) countRef.current++;
-  }, [userRating]);
+    if (userRating) count++;
+  }, [userRating, count]);
 
   // NOTE: it shows us, whether our selected watched movie is already in the list of the watched movies or not? when yes, shows us True, otherwise, False
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
@@ -259,6 +273,7 @@ export const MovieDetails: React.FC<{
     Genre: "",
     userRating,
     countRatingDecisions: countRef.current,
+    count,
   };
 
   const handleAdd = () => {

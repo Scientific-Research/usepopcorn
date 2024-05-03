@@ -43,4 +43,5 @@ export interface IMovieWatchedCombined {
   runtime: number;
   userRating: number;
   countRatingDecisions: number;
+  count: number;
 }
