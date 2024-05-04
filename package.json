@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup": "pm2 start --name mk-usepopcorn-movies-rating-frontend npm -- start",
+    "start": "vite preview --host --port 5185",
+    "deploy": "git pull --no-rebase && npm i && npm run build && pm2 restart mk-usepopcorn-movies-rating-frontend --update-env --time && pm2 save"
   },
   "dependencies": {
     "react": "^18.2.0",
