@@ -1,11 +1,11 @@
-import { Logo, NavBar, NumResults, Search } from "./components/NavBar";
+import { Logo, NavBar, NumResults, Search } from "../src/components/NavBar";
 import {
   Box,
   Main,
   MovieList,
   WatchedMoviesList,
   WatchedSummary,
-} from "./components/Main";
+} from "../src/components/Main";
 import { useState } from "react";
 
 const tempMovieData = [

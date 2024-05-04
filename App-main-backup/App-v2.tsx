@@ -1,4 +1,4 @@
-import { Logo, NavBar, NumResults, Search } from "./components/NavBar";
+import { Logo, NavBar, NumResults, Search } from "../src/components/NavBar";
 import {
   Box,
   Main,
@@ -6,13 +6,13 @@ import {
   WatchedMoviesList,
   WatchedSummary,
   MovieDetails,
-} from "./components/Main";
+} from "../src/components/Main";
 import { useEffect, useState } from "react";
 import {
   IMovie,
   IMovieWatchedCombined,
   IWatchedMovies,
-} from "./Interfaces/interfaces";
+} from "../src/Interfaces/interfaces";
 
 const tempMovieData = [
   {

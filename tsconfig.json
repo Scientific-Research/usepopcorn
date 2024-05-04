@@ -16,6 +16,11 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "App-main-backup/App-v1.tsx",
+    "App-main-backup/App-v2.tsx",
+    "App-main-backup/main-v1.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
