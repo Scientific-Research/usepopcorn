@@ -227,7 +227,7 @@ export const MovieDetails: React.FC<{
       setIsLoading(true);
       const res = await fetch(
         // `http://www.omdbapi.com/?apikey=${KEY}&s=${query}` // s for search => query
-        `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}` // i for getting ID
+        `https://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}` // i for getting ID
       );
       const data = await res.json();
       // console.log(data);
